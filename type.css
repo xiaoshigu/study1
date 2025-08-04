@@ -185,6 +185,8 @@ textarea {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
 }
 
 .dual-buttons {
@@ -231,18 +233,21 @@ textarea {
 }
 
 /* 响应式调整 */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .dimensions-group {
         flex-direction: column;
     }
     
     .dual-buttons {
-        flex-direction: column;
+        flex-direction: row; /* 保持水平布局 */
         gap: 10px;
+        justify-content: space-between; /* 使按钮分布在两端 */
     }
     
     .prev-btn, .next-btn {
-        width: 100%;
-        justify-content: center;
+        width: auto; /* 不强制100%宽度 */
+        min-width: 100px; /* 与people.css保持一致 */
+        margin: 0 5px; /* 添加间距 */
+        justify-content: center; /* 保持居中 */
     }
 }
