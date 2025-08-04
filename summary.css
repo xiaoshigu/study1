@@ -299,16 +299,19 @@ h1 i:hover {
         padding: 8px 6px;
     }
 
+    /* 修改底部按钮样式 */
     .form-footer {
-        flex-direction: column;
-        gap: 15px;
+        flex-direction: row; /* 保持水平布局 */
+        gap: 10px;
+        justify-content: space-between; /* 按钮分布在两端 */
     }
 
     .prev-btn,
-    .export-btn {
-        width: 100%;
-        justify-content: center;
-        padding: 15px 20px;
+    .next-btn {
+        width: auto; /* 不强制100%宽度 */
+        min-width: 100px; /* 设置最小宽度 */
+        margin: 0 5px; /* 添加间距 */
+        padding: 12px 20px; /* 调整内边距 */
     }
 
     .section {
