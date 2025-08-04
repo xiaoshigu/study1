@@ -173,7 +173,12 @@
                 month: '2-digit',
                 day: '2-digit'
             }).replace(/\//g, '-');
-            document.getElementById('currentTime').textContent = `${dateStr} ${timeStr}`;
+            const timeElement = document.getElementById('currentTime');
+            if (window.innerWidth <= 768) {
+                timeElement.textContent = timeStr;
+            } else {
+                timeElement.textContent = `${dateStr} ${timeStr}`;
+            }
         }
         
         updateTime();

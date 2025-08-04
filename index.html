@@ -102,6 +102,9 @@
             <!-- 选项组（圆形复选框） -->
             <div class="options-group">
                 <div class="options-container">
+                    <div class="options-header">
+                        <h4>工作类型</h4>
+                    </div>
                     <div class="options-content">
                         <label class="option-item">
                             <input type="radio" name="workType" value="normal">
@@ -125,6 +128,9 @@
                     </div>
                 </div>
                 <div class="options-container">
+                    <div class="options-header">
+                        <h4>管道类型</h4>
+                    </div>
                     <div class="options-content">
                         <label class="option-item">
                             <input type="radio" name="pipeType" value="exposed">
@@ -213,7 +219,12 @@
                 day: '2-digit'
             }).replace(/\//g, '-');
             // 更新显示
-            document.getElementById('currentTime').textContent = `${dateStr} ${timeStr}`;
+            const timeElement = document.getElementById('currentTime');
+            if (window.innerWidth <= 768) {
+                timeElement.textContent = timeStr;
+            } else {
+                timeElement.textContent = `${dateStr} ${timeStr}`;
+            }
         }
         
         // 页面加载时立即更新时间，然后每分钟更新一次

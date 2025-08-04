@@ -73,6 +73,7 @@ h1 i {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
 .form-group textarea {
@@ -115,26 +116,47 @@ h1 i {
 
 .date-group .form-group {
     flex: 1;
+    min-width: 0; /* 防止内容溢出 */
 }
 
 /* 选项组样式 */
 .options-group {
     display: flex;
-    flex-direction: column;
-    gap: 15px; /* 调整两排之间的间距 */
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 20px; /* 调整两排之间的间距 */
 }
 
 .options-container {
-    display: flex;
-    justify-content: flex-start; /* 左对齐 */
-    flex-wrap: wrap;
-    gap: 20px; /* 调整选项之间的间距 */
+    flex: 1;
+    min-width: 250px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-sizing: border-box; /* 确保边框和内边距包含在宽度内 */
+}
+
+/* 选项组标题样式 */
+.options-header {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.options-header h4 {
+    margin: 0;
+    color: #333;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .options-content {
     position: relative;
     min-width: 150px; /* 设置最小宽度使选项对齐 */
     flex: 0 0 auto; /* 不增长不收缩 */
+    margin-bottom: 10px;
 }
 
 .option-item {
@@ -180,6 +202,40 @@ h1 i {
 .option-text {
     font-size: 14px;
     white-space: nowrap;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .options-group {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .options-container {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 400px) {
+    .options-container {
+        padding: 10px;
+    }
+    
+    .options-content {
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    .date-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .date-group .form-group {
+        width: 100%;
+    }
 }
 
 /* 上传区域样式 */
