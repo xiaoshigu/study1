@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MH Site Record type界面</title>
+    <link rel="stylesheet" href="type.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="time" id="currentTime"></div>
+            <h1><i class="fas fa-angle-left" id="backBtn" style="cursor: pointer;"></i> MH Site Record</h1>
+        </header>
+
+        <form>
+            <!-- 喉管类型部分 -->
+            <div class="section-container">
+                <h2>喉管类型</h2>
+                <div id="pipeItemsContainer">
+                    <div class="item-container pipe-item" data-index="1">
+                        <div class="form-group">
+                            <label>材质</label>
+                            <select class="pipe-material form-select">
+                                <option value="">请选择材质</option>
+                                <option value="PE">PE</option>
+                                <option value="MS">MS</option>
+                                <option value="SS">SS</option>
+                                <option value="DI">D.I</option>
+                                <option value="GI">GI</option>
+                                <option value="UPVC">UPVC</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>管径 (mm)</label>
+                            <select class="pipe-diameter form-select" disabled>
+                                <option value="">请先选择材质</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="150">150</option>
+                                <option value="200">200</option>
+                                <option value="250">250</option>
+                                <option value="300">300</option>
+                                <option value="400">400</option>
+                                <option value="500">500</option>
+                                <option value="600">600</option>
+                                <option value="700">700</option>
+                                <option value="800">800</option>
+                                <option value="900">900</option>
+                                <option value="1000">1000</option>
+                                <option value="1200">1200</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>长度 (m)</label>
+                            <input type="number" class="pipe-length" min="0" step="0.01" placeholder="请输入长度">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 路面事项部分 -->
+            <div class="section-container">
+                <h2>路面事项</h2>
+                <div id="roadItemsContainer">
+                    <div class="item-container road-item" data-index="1">
+                        <div class="form-group">
+                            <label>路面类型</label>
+                            <select class="road-type form-select">
+                                <option value="">请选择路面类型</option>
+                                <option value="鎅路面 - 瀝青/石屎">鎅路面 - 瀝青/石屎</option>
+                                <option value="鋤喉坑">鋤喉坑</option>
+                                <option value="打喉坑 ---- 石屎 / 瀝青 / 路面">打喉坑 ---- 石屎 / 瀝青 / 路面</option>
+                                <option value="打行人石屎 (路面)   CC/FP">打行人石屎 (路面)   CC/FP </option>
+                                <option value="打馬路瀝青 (路面)   TM/CW">打馬路瀝青 (路面)   TM/CW </option>
+                                <option value="打馬路石屎 (路面)   CC/CW">打馬路石屎 (路面)   CC/CW</option>
+                                <option value="地補 Install Fill 凍呔油">地補 Install Fill 凍呔油</option>
+                                <option value="Verge Area泥地">Verge Area泥地</option>
+                                <option value="拆/鋪行人路地磚">拆/鋪行人路地磚</option>
+                                <option value="Trial pit 探窿">Trial pit 探窿</option>
+                                <option value="回填沙">回填沙</option>
+                                <option value="回填Type I ">回填Type I </option>
+                                <option value="鋪路面瀝青">鋪路面瀝青</option>
+                                <option value="鋪路面快乾石屎">鋪路面快乾石屎</option>
+                                <option value="打包托喉石屎 / 石屎躉快乾">打包托喉石屎 / 石屎躉快乾</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+
+                        <div class="dimensions-group">
+                            <div class="form-group dimension">
+                                <label>长度 (m)</label>
+                                <input type="number" class="road-length" min="0" step="0.01" placeholder="长度">
+                            </div>
+                            <div class="form-group dimension">
+                                <label>宽度 (m)</label>
+                                <input type="number" class="road-width" min="0" step="0.01" placeholder="宽度">
+                            </div>
+                            <div class="form-group dimension">
+                                <label>深度 (m)</label>
+                                <input type="number" class="road-depth" min="0" step="0.01" placeholder="深度">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Remark</label>
+                            <textarea class="road-remark" rows="2" placeholder="请输入备注"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 其他事项部分 -->
+            <div class="section-container">
+                <h2>其他事项</h2>
+                <div id="otherItemsContainer">
+                    <div class="item-container other-item" data-index="1">
+                        <div class="form-group">
+                            <label>事项类型</label>
+                            <select class="other-item-type form-select">
+                                <option value="">请选择事项类型</option>
+                                <option value="路面標記 （Road Marking）">路面標記 （Road Marking）</option>
+                                <option value="防漏及閉路電視（LNC & CCTV）">防漏及閉路電視（LNC & CCTV）</option>
+                                <option value="燒焊">燒焊</option>
+                                <option value="買料（SupplyInvoice）">買料（SupplyInvoice）</option>
+                                <option value="V.O.">V.O.</option>
+                                <option value="判頭封路">判頭封路</option>
+                                <option value="TIA">TIA</option>
+                                <option value="處理及運走AC喉">處理及運走AC喉</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Remark</label>
+                            <textarea class="other-remark" rows="2" placeholder="请输入备注"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 导航按钮 -->
+            <div class="form-footer dual-buttons">
+                <button type="button" class="prev-btn" id="prevBtn">
+                    <i class="fas fa-angle-left"></i> 上一页
+                </button>
+                <button type="button" class="next-btn" id="nextBtn">
+                    下一页 <i class="fas fa-angle-right"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('zh-CN', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false
+            });
+            const dateStr = now.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            }).replace(/\//g, '-');
+            document.getElementById('currentTime').textContent = `${dateStr} ${timeStr}`;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 60000);
+
+        // 全局计数器
+       // let pipeItemCount = 1;
+       // let roadItemCount = 1;
+       // let otherItemCount = 1;
+
+        // 监听所有变化
+        document.addEventListener('change', function(e) {
+            // 喉管类型自动添加逻辑
+            if (e.target.classList.contains('pipe-material')) {
+                const pipeItem = e.target.closest('.pipe-item');
+                const diameterSelect = pipeItem.querySelector('.pipe-diameter');
+                diameterSelect.disabled = !e.target.value;
+                if (!e.target.value) {
+                    diameterSelect.value = '';
+                }
+            }
+            
+            if (e.target.classList.contains('pipe-diameter')) {
+                const pipeItem = e.target.closest('.pipe-item');
+                const pipeMaterial = pipeItem.querySelector('.pipe-material').value;
+                const pipeDiameter = pipeItem.querySelector('.pipe-diameter').value;
+                
+                if (pipeMaterial && pipeDiameter && pipeItem === document.querySelector('.pipe-item:last-child')) {
+                    addNewPipeItem();
+                }
+            }
+            
+            
+            // 路面事项自动添加逻辑
+            if (e.target.classList.contains('road-type') || 
+                e.target.classList.contains('road-length') ||
+                e.target.classList.contains('road-width') ) {
+                
+                const roadItem = e.target.closest('.road-item');
+                const roadType = roadItem.querySelector('.road-type').value;
+                const roadLength = roadItem.querySelector('.road-length').value;
+                const roadWidth = roadItem.querySelector('.road-width').value;
+
+                
+                if (roadType && roadLength && roadWidth  && roadItem === document.querySelector('.road-item:last-child')) {
+                    addNewRoadItem();
+                }
+            }
+            
+            // 其他事项自动添加逻辑
+            if (e.target.classList.contains('other-item-type')) {
+                const otherItem = e.target.closest('.other-item');
+                const otherType = otherItem.querySelector('.other-item-type').value;
+                
+                if (otherType && otherItem === document.querySelector('.other-item:last-child')) {
+                    addNewOtherItem();
+                }
+            }
+        });
+
+        // 添加新喉管类型函数
+        function addNewPipeItem() {
+            const container = document.getElementById('pipeItemsContainer');
+            const template = document.querySelector('.pipe-item');
+            const newIndex = document.querySelectorAll('.pipe-item').length + 1;
+            
+            // 添加分隔线
+            const divider = document.createElement('div');
+            divider.className = 'item-divider';
+            container.appendChild(divider);
+            
+            const newItem = template.cloneNode(true);
+            newItem.setAttribute('data-index', newIndex);
+            
+            // 重置所有字段
+            const inputs = newItem.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.value = '';
+                if (input.classList.contains('pipe-diameter')) {
+                    input.disabled = true;
+                }
+            });
+            
+            container.appendChild(newItem);
+        }
+
+        // 添加新路面事项函数
+        function addNewRoadItem() {
+            const container = document.getElementById('roadItemsContainer');
+            const template = document.querySelector('.road-item');
+            const newIndex = document.querySelectorAll('.road-item').length + 1;
+            
+            // 添加分隔线
+            const divider = document.createElement('div');
+            divider.className = 'item-divider';
+            container.appendChild(divider);
+            
+            const newItem = template.cloneNode(true);
+            newItem.setAttribute('data-index', newIndex);
+            
+            // 重置所有字段
+            const inputs = newItem.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            
+            container.appendChild(newItem);
+            }
+
+        // 添加新其他事项函数
+        function addNewOtherItem() {
+            const container = document.getElementById('otherItemsContainer');
+            const template = document.querySelector('.other-item');
+            const newIndex = document.querySelectorAll('.other-item').length + 1;
+            
+            // 添加分隔线
+            const divider = document.createElement('div');
+            divider.className = 'item-divider';
+            container.appendChild(divider);
+            
+            const newItem = template.cloneNode(true);
+            newItem.setAttribute('data-index', newIndex);
+            
+            // 重置所有字段
+            const inputs = newItem.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.value = '';
+            });
+            
+            container.appendChild(newItem);
+        }
+
+        // 初始化时只保留一个空项
+        // 数据保存和加载功能
+//开始变化！！！！！
+
+        function saveTypeFormData() {
+            const pipeItems = [...document.querySelectorAll('.pipe-item')].map(item => ({
+                material: item.querySelector('.pipe-material').value,
+                diameter: item.querySelector('.pipe-diameter').value,
+                length: item.querySelector('.pipe-length').value
+            }));
+
+            const roadItems = [...document.querySelectorAll('.road-item')].map(item => ({
+                type: item.querySelector('.road-type').value,
+                length: item.querySelector('.road-length').value,
+                width: item.querySelector('.road-width').value,
+                depth: item.querySelector('.road-depth').value,
+                remark: item.querySelector('.road-remark').value
+            }));
+
+            const otherItems = [...document.querySelectorAll('.other-item')].map(item => ({
+                type: item.querySelector('.other-item-type').value,
+                remark: item.querySelector('.other-remark').value
+            }));
+
+            localStorage.setItem('typeFormData', JSON.stringify({ pipeItems, roadItems, otherItems }));
+        }
+
+        function loadTypeFormData() {
+            const saved = localStorage.getItem('typeFormData');
+            if (!saved) return;
+
+            const { pipeItems = [], roadItems = [], otherItems = [] } = JSON.parse(saved);
+
+            // ✅ 默认结构：页面中已有一个原始条目，我们只填充进去，不清空
+            const pipeItemEls = document.querySelectorAll('.pipe-item');
+            const roadItemEls = document.querySelectorAll('.road-item');
+            const otherItemEls = document.querySelectorAll('.other-item');
+
+            pipeItems.forEach((data, idx) => {
+                let el = pipeItemEls[idx];
+                if (!el) {
+                    addNewPipeItem();
+                    el = document.querySelectorAll('.pipe-item')[idx];
+                }
+                el.querySelector('.pipe-material').value = data.material || '';
+                const diameter = el.querySelector('.pipe-diameter');
+                diameter.disabled = !data.material;
+                diameter.value = data.diameter || '';
+                el.querySelector('.pipe-length').value = data.length || '';
+            });
+
+            roadItems.forEach((data, idx) => {
+                let el = roadItemEls[idx];
+                if (!el) {
+                    addNewRoadItem();
+                    el = document.querySelectorAll('.road-item')[idx];
+                }
+                el.querySelector('.road-type').value = data.type || '';
+                el.querySelector('.road-length').value = data.length || '';
+                el.querySelector('.road-width').value = data.width || '';
+                el.querySelector('.road-depth').value = data.depth || '';
+                el.querySelector('.road-remark').value = data.remark || '';
+            });
+
+            otherItems.forEach((data, idx) => {
+                let el = otherItemEls[idx];
+                if (!el) {
+                    addNewOtherItem();
+                    el = document.querySelectorAll('.other-item')[idx];
+                }
+                el.querySelector('.other-item-type').value = data.type || '';
+                el.querySelector('.other-remark').value = data.remark || '';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadTypeFormData();
+        });
+
+
+
+
+        // 返回按钮功能
+        document.getElementById('backBtn').addEventListener('click', function() {
+            saveTypeFormData();
+            window.location.href = 'index.html';
+        });
+
+        // 导航按钮事件
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            saveTypeFormData();
+            window.location.href = 'index.html';
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            saveTypeFormData();
+            window.location.href = 'people.html';
+        });
+
+
+    </script>
+</body>
+</html>
