@@ -364,6 +364,7 @@
     @media (max-width: 768px) {
     body {
         padding: 5px;
+        font-size: 16px; /* 增加基础字体大小 */
     }
 
     .container {
@@ -376,9 +377,11 @@
 
     h1 {
         font-size: 20px;
+        padding-right: 40px; /* 为时间显示留出空间 */
     }
 
     .time {
+        font-size: 14px; /* 稍微增大时间字体 */
         font-size: 12px;
         top: 5px;
     }
@@ -386,19 +389,19 @@
     .worker-row,
     .machine-row,
     .apology-row {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 15px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        margin-bottom: 15px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.5fr; /* 调整三列比例 */
+        gap: 8px;
+        align-items: center;
+        padding: 10px;
+        margin-bottom: 10px;
     }
 
     .worker-name,
     .quantity-section,
     .hours-section {
         width: 100%;
-        justify-content: center;
+        justify-content: flex-start;
     }
 
     .quantity-section,
@@ -412,60 +415,69 @@
     }
 
     .time-period-control {
-        width: 100%;
-        flex-direction: column;
-        gap: 8px;
+        flex-direction: row; /* 保持水平排列 */
+        gap: 5px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 8px;
     }
 
     .datetime-row {
-        width: 100%;
-        justify-content: center;
+        flex: 1;
+        min-width: 140px; /* 确保日期输入框有足够宽度 */
     }
 
     .datetime-input {
         width: 100%;
-        max-width: 200px;
-        font-size: 12px;
+        padding: 8px;
+        font-size: 14px;
+        height: 36px;
     }
 
     .time-separator {
         margin: 5px 0;
+        font-size: 14px;
     }
 
     .worker-label,
     .machine-label,
     .apology-label {
-        font-size: 14px;
+        font-size: 16px;
         font-weight: bold;
         width: 100%;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
+        color: #333;
+       /* display: block;  独占一行 */
     }
 
     .quantity-label,
     .hours-label {
-        font-size: 12px;
-        margin: 5px 0 2px 0;
+        font-size: 14px;
+        margin: 8px 0 4px 0;
+        color: #555;
     }
 
     .quantity-control,
     .hours-control {
         width: 100%;
         justify-content: center;
+        margin: 8px 0;
     }
 
     .quantity-btn,
     .hours-btn {
-        width: 40px;
-        height: 40px;
+        width: 36px; /* 稍微减小按钮大小 */
+        height: 36px;
         font-size: 16px;
+        background-color: #fff;
     }
 
     .quantity-input,
     .hours-input {
-        width: 80px;
-        height: 40px;
+        width: 60px; /* 减小输入框宽度 */
+        height: 36px;
         font-size: 16px;
-        text-align: center;
+        margin: 0 5px;
     }
 
     .worker-row-other .worker-name {
@@ -480,12 +492,13 @@
         margin-bottom: 8px;
         padding: 8px;
         font-size: 14px;
+        margin-top: 5px;
     }
 
     .size-selection {
-        width: 100%;
-        justify-content: center;
-        gap: 20px;
+        justify-content: flex-start;
+        gap: 15px;
+        margin-top: 8px;
     }
 
     .size-option {
@@ -499,6 +512,8 @@
         background-color: white;
         border-top: 1px solid #eee;
         margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
     }
 
     .prev-btn,
@@ -514,9 +529,9 @@
     }
 
     h2 {
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 15px;
-        padding: 8px 0;
+        padding: 10px 0;
         border-bottom: 2px solid #2196F3;
     }
 }
