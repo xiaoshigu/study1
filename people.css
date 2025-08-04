@@ -1,0 +1,522 @@
+/* 全局样式 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    }
+    
+    body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    padding: 10px;
+    }
+
+    .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    }
+    
+    /* 头部样式 */
+    header {
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    }
+    
+    .time {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    color: #666;
+    font-size: 14px;
+    font-weight: bold;
+    }
+    
+    h1 {
+    font-size: 24px;
+    color: #333;
+    }
+    
+    h1 i {
+    margin-right: 10px;
+    color: #666;
+    }
+    
+    h2 {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    }
+    
+    /* 行样式 */
+    .worker-row,
+    .machine-row,
+    .apology-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.5fr 3.5fr;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    }
+
+    /* 工种名称区域 */
+    .worker-name {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    }
+
+    /* 数量区域 */
+    .quantity-section {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+    }
+
+    /* 工作时间区域 */
+    .hours-section {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    }
+
+    /* 大小选择区域 */
+    .size-selection {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    }
+
+    .size-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    }
+
+    .radio-custom {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    position: relative;
+    }
+
+    .size-option input[type="radio"] {
+    display: none;
+    }
+
+    .size-option input[type="radio"]:checked + .radio-custom {
+    border-color: #2196F3;
+    }
+
+    .size-option input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background-color: #2196F3;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    }
+
+    /* 时间段选择样式 */
+    .time-period-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+
+    .datetime-row {
+    display: flex;
+    align-items: center;
+    }
+
+    .datetime-input {
+    padding: 2px 3px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 10px;
+    width: 115px;
+    }
+
+    .time-separator {
+    font-size: 11px;
+    color: #666;
+    margin: 0 3px;
+    white-space: nowrap;
+    }
+    
+    .worker-label,
+    .machine-label,
+    .apology-label {
+    font-weight: bold;
+    color: #333;
+    font-size: 15px;
+    text-align: center;
+    }
+
+    .quantity-label,
+    .hours-label {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+    white-space: nowrap;
+    min-width: 50px;
+    }
+
+    /* 其他工种特殊样式 */
+    .worker-row-other .worker-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    }
+
+    .input-other {
+    flex: 1;
+    padding: 4px 6px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 12px;
+    min-width: 80px;
+    max-width: 100px;
+    }
+
+    .input-other:focus {
+    outline: none;
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+    }
+    
+    .quantity-label,
+    .hours-label {
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+    margin-left: 15px;
+    }
+    
+    /* 数量控制样式 */
+    .quantity-control,
+    .hours-control {
+    display: flex;
+    align-items: center;
+    }
+    
+    .quantity-btn,
+    .hours-btn {
+    width: 26px;
+    height: 26px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    }
+    
+    .quantity-btn:hover,
+    .hours-btn:hover {
+    background-color: #e0e0e0;
+    }
+    
+    .quantity-input,
+    .hours-input {
+    width: 40px;
+    text-align: center;
+    margin: 0 3px;
+    padding: 3px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 13px;
+    }
+
+    /* 隐藏数字输入框的上下箭头 */
+    .quantity-input::-webkit-outer-spin-button,
+    .quantity-input::-webkit-inner-spin-button,
+    .hours-input::-webkit-outer-spin-button,
+    .hours-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    .quantity-input[type=number],
+    .hours-input[type=number] {
+    -moz-appearance: textfield;
+    }
+
+   
+    /* 大小选择样式 */
+    .size-selection {
+    display: flex;
+    gap: 15px;
+    }
+    
+    .size-option {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    }
+    
+    .size-option input[type="radio"] {
+    display: none;
+    }
+    
+    .radio-custom {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #4CAF50;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+    }
+    
+    .radio-custom::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    }
+    
+    .size-option input[type="radio"]:checked + .radio-custom::after {
+    opacity: 1;
+    }
+    
+    .size-label {
+    font-size: 14px;
+    }
+    
+    /* 表单页脚 */
+    .form-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    }
+    
+    .prev-btn, .next-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s;
+    }
+    
+    .prev-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    }
+    
+    .prev-btn:hover {
+    background-color: #e0e0e0;
+    }
+    
+    .next-btn {
+    background-color: #00BFFF;
+    color: white;
+    border: none;
+    }
+
+    .next-btn:hover {
+    background-color: #0099CC;
+    }
+    
+    .prev-btn i {
+    margin-right: 8px;
+    }
+    
+    .next-btn i {
+    margin-left: 8px;
+    }
+    
+    /* 响应式调整 */
+    @media (max-width: 768px) {
+    body {
+        padding: 5px;
+    }
+
+    .container {
+        padding: 10px;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+        min-height: 100vh;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .time {
+        font-size: 12px;
+        top: 5px;
+    }
+
+    .worker-row,
+    .machine-row,
+    .apology-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .worker-name,
+    .quantity-section,
+    .hours-section {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .quantity-section,
+    .hours-section {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .size-selection {
+        justify-content: center;
+    }
+
+    .time-period-control {
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .datetime-row {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .datetime-input {
+        width: 100%;
+        max-width: 200px;
+        font-size: 12px;
+    }
+
+    .time-separator {
+        margin: 5px 0;
+    }
+
+    .worker-label,
+    .machine-label,
+    .apology-label {
+        font-size: 14px;
+        font-weight: bold;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .quantity-label,
+    .hours-label {
+        font-size: 12px;
+        margin: 5px 0 2px 0;
+    }
+
+    .quantity-control,
+    .hours-control {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .quantity-btn,
+    .hours-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .quantity-input,
+    .hours-input {
+        width: 80px;
+        height: 40px;
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .worker-row-other .worker-name {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .input-other {
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .size-selection {
+        width: 100%;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .size-option {
+        font-size: 14px;
+    }
+
+    .form-footer {
+        padding: 15px 0;
+        position: sticky;
+        bottom: 0;
+        background-color: white;
+        border-top: 1px solid #eee;
+        margin-top: 20px;
+    }
+
+    .prev-btn,
+    .next-btn {
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 0 5px;
+        min-width: 100px;
+    }
+
+    .section-container {
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 16px;
+        margin-bottom: 15px;
+        padding: 8px 0;
+        border-bottom: 2px solid #2196F3;
+    }
+}

@@ -1,0 +1,248 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* 主容器 */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* 头部样式 */
+header {
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.time {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    color: #666;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+h1 i {
+    margin-right: 10px;
+    color: #666;
+}
+
+h2 {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 表单组样式 */
+.section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    font-size: 14px;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* 事项样式 */
+.content-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+/* 统一的内容容器样式 */
+ .section-container {
+    margin-bottom: 30px;
+}
+
+/* 项目容器样式 */
+.item-container {
+    position: relative;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+/* 项目序号标记 */
+.item-index {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    background-color: #4CAF50;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+/* 分隔线样式 */
+.item-divider {
+    height: 1px;
+    background-color: #ddd;
+    margin: 15px 0;
+    position: relative;
+}
+
+.item-divider::before {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    padding: 0 10px;
+    color: #888;
+    font-size: 12px;
+}
+
+/* 调整尺寸组的间距 */
+.dimensions-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.dimension {
+    flex: 1;
+}
+
+.form-select, input[type="text"], 
+input[type="number"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* 表单页脚 */
+.form-footer {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.dual-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.prev-btn, .next-btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.prev-btn {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+}
+
+.prev-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.next-btn {
+    background-color: #00BFFF;
+    color: white;
+    border: none;
+}
+
+.next-btn:hover {
+    background-color: #0099CC;
+}
+
+.prev-btn i {
+    margin-right: 8px;
+}
+
+.next-btn i {
+    margin-left: 8px;
+}
+
+/* 响应式调整 */
+@media (max-width: 600px) {
+    .dimensions-group {
+        flex-direction: column;
+    }
+    
+    .dual-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .prev-btn, .next-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MH Site Record - 总结</title>
+    <link rel="stylesheet" href="summary.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 引入SheetJS库用于Excel导出 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="time" id="currentTime"></div>
+            <h1><i class="fas fa-angle-left" id="backBtn" style="cursor: pointer;"></i> MH Site Record</h1>
+        </header>
+
+        <div class="summary-content">
+            <h2>记录总结</h2>
+
+            <!-- 基本信息 -->
+            <div class="section">
+                <h3>基本信息</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <label>Contract No.:</label>
+                        <span id="contractNo">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Job No.:</label>
+                        <span id="jobNo">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Order No.:</label>
+                        <span id="orderNo">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>WSD foreman:</label>
+                        <span id="wsdForeman">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>Location:</label>
+                        <span id="location">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>工作简述:</label>
+                        <span id="workDescription">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>开工日期:</label>
+                        <span id="startDate">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>实际开工日期:</label>
+                        <span id="actualStartDate">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>完工日期:</label>
+                        <span id="endDate">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>实际完工日期:</label>
+                        <span id="actualEndDate">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>工作类型:</label>
+                        <span id="workType">-</span>
+                    </div>
+                    <div class="info-item">
+                        <label>管道类型:</label>
+                        <span id="pipeType">-</span>
+                    </div>
+                </div>
+                <div class="section-subsection">
+                    <h4>上传附件</h4>
+                    <div id="attachmentsSection">
+                        <p>暂无附件</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 图片预览模态框 -->
+            <div id="imagePreviewModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-btn" id="closePreview">&times;</span>
+                    <img id="previewImage" src="" alt="预览图片" style="max-width: 100%; max-height: 80vh;">
+                    <div class="image-info">
+                        <span id="imageName"></span>
+                        <button class="download-btn" id="downloadFromPreview">
+                            <i class="fas fa-download"></i> 下载
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 喉管信息 -->
+            <div class="section">
+                <h3>喉管信息</h3>
+                <div class="section-subsection">
+                    <h4>喉管类型</h4>
+                    <div id="pipeTypesSection">
+                        <p>暂无数据</p>
+                    </div>
+                </div>
+                <div class="section-subsection">
+                    <h4>路面事项</h4>
+                    <div id="roadMattersSection">
+                        <p>暂无数据</p>
+                    </div>
+                </div>
+                <div class="section-subsection">
+                    <h4>其他事项</h4>
+                    <div id="otherMattersSection">
+                        <p>暂无数据</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 人员设备 -->
+            <div class="section">
+                <h3>人员设备</h3>
+                <div class="section-subsection">
+                    <h4>工作工人</h4>
+                    <div id="workersSection">
+                        <p>暂无数据</p>
+                    </div>
+                </div>
+                <div class="section-subsection">
+                    <h4>使用机械</h4>
+                    <div id="machinesSection">
+                        <p>暂无数据</p>
+                    </div>
+                </div>
+                <div class="section-subsection">
+                    <h4>标牌</h4>
+                    <div id="signsSection">
+                        <p>暂无数据</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部按钮 -->
+        <div class="form-footer">
+            <button type="button" class="prev-btn" id="prevBtn">
+                <i class="fas fa-angle-left"></i> 上一页
+            </button>
+            <button type="button" class="next-btn" id="exportBtn">
+                <i class="fas fa-download"></i> 提交导出
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentPreviewFile = null;
+        // 1. 实时更新时间
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('zh-CN', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+            const dateStr = now.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            }).replace(/\//g, '-');
+
+            const timeElement = document.getElementById('currentTime');
+            if (window.innerWidth <= 768) {
+                timeElement.textContent = timeStr;
+            } else {
+                timeElement.textContent = `${dateStr} ${timeStr}`;
+            }
+        }
+
+        updateTime();
+        setInterval(updateTime, 60000);
+        window.addEventListener('resize', updateTime);
+
+        // 2. 加载和显示所有数据
+        function loadAllData() {
+            // 加载基本信息
+            const indexData = JSON.parse(localStorage.getItem('indexFormData') || '{}');
+            document.getElementById('contractNo').textContent = indexData.contractNo || '-';
+            document.getElementById('jobNo').textContent = indexData.jobNo || '-';
+            document.getElementById('orderNo').textContent = indexData.orderNo || '-';
+            document.getElementById('wsdForeman').textContent = indexData.wsdForeman || '-';
+            document.getElementById('location').textContent = indexData.location || '-';
+            document.getElementById('workDescription').textContent = indexData.workDescription || '-';
+            document.getElementById('startDate').textContent = indexData.startDate || '-';
+            document.getElementById('actualStartDate').textContent = indexData.actualStartDate || '-';
+            document.getElementById('endDate').textContent = indexData.endDate || '-';
+            document.getElementById('actualEndDate').textContent = indexData.actualEndDate || '-';
+            document.getElementById('workType').textContent = getWorkTypeText(indexData.workType);
+            document.getElementById('pipeType').textContent = getPipeTypeText(indexData.pipeType);
+
+            // 加载喉管信息数据
+            const typeData = JSON.parse(localStorage.getItem('typeFormData') || '{}');
+            displayPipeTypes(typeData.pipeItems || []); //喉管类型
+            displayRoadMatters(typeData.roadItems || []); //路面事项
+            displayOtherMatters(typeData.otherItems || []); //其他事项
+
+
+
+            // 加载工作工人数据
+            const peopleData = JSON.parse(localStorage.getItem('peopleFormData') || '{}');
+            displayWorkers(peopleData.workers || []);
+            displayMachines(peopleData.machines || []);
+            displaySigns(peopleData.signs || []);
+
+            // 显示附件信息
+            displayAttachments(indexData.uploadedFiles || []);
+        }
+
+        function getWorkTypeText(value) {
+            const types = {
+                'normal': 'Normal works',
+                'ueFactor': 'U&E Factor',
+                'adjustedUEFactor': 'Adjusted U&E Factor'
+            };
+            return types[value] || '-';
+        }
+
+        function getPipeTypeText(value) {
+            const types = {
+                'exposed': '明喉',
+                'hidden': '藏喉',
+                'mixed': '混合'
+            };
+            return types[value] || '-';
+        }
+
+        function displayPipeTypes(pipeItems) {
+            const section = document.getElementById('pipeTypesSection');
+            if (pipeItems.length === 0) {
+                section.innerHTML = '<p>暂无数据</p>';
+                return;
+            }
+
+            let html = '<table class="data-table"><thead><tr><th>材质</th><th>直径</th><th>长度</th></tr></thead><tbody>';
+            pipeItems.forEach(item => {
+                if (item.material || item.diameter || item.length) {
+                    html += `<tr><td>${item.material || '-'}</td><td>${item.diameter || '-'}</td><td>${item.length || '-'}</td></tr>`;
+                }
+            });
+            html += '</tbody></table>';
+            section.innerHTML = html;
+        }
+
+        // 路面事项
+        function displayRoadMatters(roadItems) {
+            const section = document.getElementById('roadMattersSection');
+            if (!roadItems.length) {
+                section.innerHTML = '<p>暂无数据</p>';
+                return;
+            }
+
+            let html = '<table class="data-table"><thead><tr><th>类型</th><th>长度</th><th>宽度</th><th>深度</th><th>remark</th></tr></thead><tbody>';
+            roadItems.forEach(item => {
+                if (item.type || item.length || item.width || item.depth || item.remark) {
+                    html += `<tr>
+                        <td>${item.type || '-'}</td>
+                        <td>${item.length || '-'}</td>
+                        <td>${item.width || '-'}</td>
+                        <td>${item.depth || '-'}</td>
+                        <td>${item.remark || '-'}</td>
+                    </tr>`;
+                }
+            });
+            html += '</tbody></table>';
+            section.innerHTML = html;
+        }
+
+        // 渲染其他事项表格
+        function displayOtherMatters(otherItems) {
+            const section = document.getElementById('otherMattersSection');
+            if (!otherItems.length) {
+                section.innerHTML = '<p>暂无数据</p>';
+                return;
+            }
+
+            let html = '<table class="data-table"><thead><tr><th>类型</th><th>备注</th></tr></thead><tbody>';
+            otherItems.forEach(item => {
+                if (item.type || item.remark) {
+                    html += `<tr>
+                        <td>${item.type || '-'}</td>
+                        <td>${item.remark || '-'}</td>
+                    </tr>`;
+                }
+            });
+            html += '</tbody></table>';
+            section.innerHTML = html;
+        }
+
+
+        function displayWorkers(workers) {
+            const section = document.getElementById('workersSection');
+            if (workers.length === 0) {
+                section.innerHTML = '<p>暂无数据</p>';
+                return;
+            }
+
+            let html = '<table class="data-table"><thead><tr><th>工种</th><th>数量</th><th>开始时间</th><th>结束时间</th></tr></thead><tbody>';
+            workers.forEach(worker => {
+                const workerType = worker.other || worker.type;
+                const startTime = worker.startTime ? new Date(worker.startTime).toLocaleString('zh-CN') : '-';
+                const endTime = worker.endTime ? new Date(worker.endTime).toLocaleString('zh-CN') : '-';
+                html += `<tr><td>${workerType}</td><td>${worker.quantity}</td><td>${startTime}</td><td>${endTime}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            section.innerHTML = html;
+        }
+
+        function displayMachines(machines) {
+            const section = document.getElementById('machinesSection');
+            if (machines.length === 0) {
+                section.innerHTML = '<p>暂无数据</p>';
+                return;
+            }
+
+            let html = '<table class="data-table"><thead><tr><th>机械类型</th><th>数量</th><th>工作时间(h)</th></tr></thead><tbody>';
+            machines.forEach(machine => {
+                html += `<tr><td>${machine.type}</td><td>${machine.quantity}</td><td>${machine.hours}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            section.innerHTML = html;
+        }
+
+        function displaySigns(signs) {
+            const section = document.getElementById('signsSection');
+            if (signs.length === 0) {
+                section.innerHTML = '<p>暂无数据</p>';
+                return;
+            }
+
+            let html = '<table class="data-table"><thead><tr><th>标牌类型</th><th>数量</th><th>大小</th><th>工作时间</th></tr></thead><tbody>';
+            signs.forEach(sign => {
+                const size = sign.size === 'large' ? '大' : sign.size === 'small' ? '小' : '-';
+                const time = sign.hours ? `${sign.hours}h` : '-';
+                html += `<tr><td>${sign.type}</td><td>${sign.quantity}</td><td>${size}</td><td>${time}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            section.innerHTML = html;
+        }
+
+        function displayAttachments(files) {
+            const section = document.getElementById('attachmentsSection');
+            if (files.length === 0) {
+                section.innerHTML = '<p>暂无附件</p>';
+                return;
+            }
+
+            let html = '<div class="thumbnail-grid">';
+            files.forEach((file, index) => {
+                if (file.type.startsWith('image/')) {
+                    html += `
+                        <div class="thumbnail-slot" onclick="openImagePreview(${index})">
+                            <img src="data:${file.type};base64,${file.data}" class="thumbnail">
+                            <div class="file-info">${file.name} (${(file.size / 1024).toFixed(1)} KB)</div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="thumbnail-slot">
+                            <div class="file-icon"><i class="fas fa-file"></i></div>
+                            <div class="file-info">${file.name} (${(file.size / 1024).toFixed(1)} KB)</div>
+                        </div>
+                    `;
+                }
+            });
+            html += '</div>';
+            section.innerHTML = html;
+        }
+
+// 图片预览功能
+function openImagePreview(index) {
+    const files = JSON.parse(localStorage.getItem('indexFormData') || '{}').uploadedFiles || [];
+    if (index >= 0 && index < files.length && files[index].type.startsWith('image/')) {
+        currentPreviewFile = files[index];
+        const modal = document.getElementById('imagePreviewModal');
+        const previewImage = document.getElementById('previewImage');
+        const imageName = document.getElementById('imageName');
+        
+        previewImage.src = `data:${currentPreviewFile.type};base64,${currentPreviewFile.data}`;
+        imageName.textContent = currentPreviewFile.name;
+        modal.style.display = 'flex';
+    }
+}
+
+// 关闭预览
+document.getElementById('closePreview').addEventListener('click', function() {
+    document.getElementById('imagePreviewModal').style.display = 'none';
+});
+
+// 从预览下载
+document.getElementById('downloadFromPreview').addEventListener('click', function() {
+    if (currentPreviewFile) {
+        // 创建Blob对象
+        const byteString = atob(currentPreviewFile.data);
+        const ab = new ArrayBuffer(byteString.length);
+        const ia = new Uint8Array(ab);
+        for (let i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+        const blob = new Blob([ab], { type: currentPreviewFile.type });
+        
+        // 创建下载链接
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = currentPreviewFile.name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+    }
+});
+
+// 点击模态框外部关闭
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('imagePreviewModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+
+
+        // 3. 导出Excel功能
+        function exportToExcel() {
+            const wb = XLSX.utils.book_new();
+            const allData = [];
+
+            // 添加标题
+            allData.push(['MH Site Record 记录总结']);
+            allData.push(['导出时间：', new Date().toLocaleString('zh-CN')]);
+            allData.push(['']); // 空行
+
+            // 基本信息
+            allData.push(['=== 基本信息 ===']);
+            allData.push(['Contract No.', document.getElementById('contractNo').textContent]);
+            allData.push(['Location', document.getElementById('location').textContent]);
+            allData.push(['工作类型', document.getElementById('workType').textContent]);
+            allData.push(['管道类型', document.getElementById('pipeType').textContent]);
+            allData.push(['']); // 空行
+
+            // 喉管信息
+            const typeData = JSON.parse(localStorage.getItem('typeFormData') || '{}');
+            allData.push(['=== 喉管信息 ===']);
+            if (typeData.pipeItems && typeData.pipeItems.length > 0) {
+                allData.push(['材质', '直径', '长度']);
+                typeData.pipeItems.forEach(item => {
+                    if (item.material || item.diameter || item.length) {
+                        allData.push([item.material || '-', item.diameter || '-', item.length || '-']);
+                    }
+                });
+            } else {
+                allData.push(['暂无数据']);
+            }
+            allData.push(['']); // 空行
+
+            // 路面事项
+            allData.push(['=== 路面事项 ===']);
+            if (typeData.roadItems && typeData.roadItems.length > 0) {
+                allData.push(['类型', '长度', '宽度', '深度', 'remark']);
+                typeData.roadItems.forEach(item => {
+                    if (item.type || item.length || item.width || item.depth || item.remark) {
+                        allData.push([
+                            item.type || '-',
+                            item.length || '-',
+                            item.width || '-',
+                            item.depth || '-',
+                            item.remark || '-'
+                        ]);
+                    }
+                });
+            } else {
+                allData.push(['暂无数据']);
+            }
+            allData.push(['']); // 空行
+
+            // 其他事项
+            allData.push(['=== 其他事项 ===']);
+            if (typeData.otherItems && typeData.otherItems.length > 0) {
+                allData.push(['类型', 'remark']);
+                typeData.otherItems.forEach(item => {
+                    if (item.type || item.remark) {
+                        allData.push([
+                            item.type || '-',
+                            item.remark || '-'
+                        ]);
+                    }
+                });
+            } else {
+                allData.push(['暂无数据']);
+            }
+            allData.push(['']); // 空行
+
+            // 人员设备
+            const peopleData = JSON.parse(localStorage.getItem('peopleFormData') || '{}');
+            allData.push(['=== 人员设备 ===']);
+
+            // 工作工人
+            allData.push(['--- 工作工人 ---']);
+            if (peopleData.workers && peopleData.workers.length > 0) {
+                allData.push(['工种', '数量', '开始时间', '结束时间']);
+                peopleData.workers.forEach(worker => {
+                    const workerType = worker.other || worker.type;
+                    const startTime = worker.startTime ? new Date(worker.startTime).toLocaleString('zh-CN') : '-';
+                    const endTime = worker.endTime ? new Date(worker.endTime).toLocaleString('zh-CN') : '-';
+                    allData.push([workerType, worker.quantity, startTime, endTime]);
+                });
+            } else {
+                allData.push(['暂无数据']);
+            }
+            allData.push(['']); // 空行
+
+            // 使用机械
+            allData.push(['--- 使用机械 ---']);
+            if (peopleData.machines && peopleData.machines.length > 0) {
+                allData.push(['机械类型', '数量', '工作时间(h)']);
+                peopleData.machines.forEach(machine => {
+                    allData.push([machine.type, machine.quantity, machine.hours]);
+                });
+            } else {
+                allData.push(['暂无数据']);
+            }
+            allData.push(['']); // 空行
+
+            // 标牌
+            allData.push(['--- 标牌 ---']);
+            if (peopleData.signs && peopleData.signs.length > 0) {
+                allData.push(['标牌类型', '数量', '大小', '工作时间']);
+                peopleData.signs.forEach(sign => {
+                    const size = sign.size === 'large' ? '大' : sign.size === 'small' ? '小' : '-';
+                    const time = sign.hours ? `${sign.hours}h` : '-';
+                    allData.push([sign.type, sign.quantity, size, time]);
+                });
+            } else {
+                allData.push(['暂无数据']);
+            }
+            allData.push(['']); // 空行
+
+            // 附件信息
+            const indexData = JSON.parse(localStorage.getItem('indexFormData') || '{}');
+            allData.push(['=== 附件信息 ===']);
+            if (indexData.uploadedFiles && indexData.uploadedFiles.length > 0) {
+                allData.push(['文件名', '文件大小(KB)']);
+                indexData.uploadedFiles.forEach(file => {
+                    allData.push([file.name, (file.size / 1024).toFixed(1)]);
+                });
+            } else {
+                allData.push(['暂无附件']);
+            }
+
+            // 创建工作表
+            const ws = XLSX.utils.aoa_to_sheet(allData);
+            XLSX.utils.book_append_sheet(wb, ws, 'MH Site Record');
+
+            // 导出文件
+            const contractNo = document.getElementById('contractNo').textContent || 'MH_Site_Record';
+            const fileName = `${contractNo}_${new Date().toISOString().slice(0, 10)}.xlsx`;
+            XLSX.writeFile(wb, fileName);
+
+            alert('Excel文件已导出成功！');
+        }
+
+        // 4. 事件监听
+        document.getElementById('backBtn').addEventListener('click', function() {
+            window.location.href = 'people.html';
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            window.location.href = 'people.html';
+        });
+
+        document.getElementById('exportBtn').addEventListener('click', function() {
+            exportToExcel();
+        });
+
+        // 5. 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+        });
+    </script>
+</body>
+</html>

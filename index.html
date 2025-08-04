@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MH Site Record</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- 高德地图API -->
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=YOUR_API_KEY&plugin=AMap.PlaceSearch,AMap.Geocoder"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- 右上角显示当前时间 -->
+            <div class="time" id="currentTime"></div>
+            <h1><i class="fas fa-angle-left" id="backBtn" style="cursor: pointer;"></i> MH Site Record</h1>
+        </header>
+
+        <form>
+            <div class="form-group">
+                <label for="Contract No">Contract No.</label>
+                <input type="text" id="Contract No" placeholder="请输入内容">
+            </div>
+
+            <div class="form-group">
+                <label for="jobNo">Job No.</label>
+                <input type="text" id="jobNo" placeholder="请输入内容">
+            </div>
+
+            <div class="form-group">
+                <label for="orderNo">Order No.</label>
+                <input type="text" id="orderNo" placeholder="请输入内容">
+            </div>
+
+            <div class="form-group">
+                <label for="wsdForeman">WSD foreman</label>
+                <input type="text" id="wsdForeman" placeholder="请输入内容">
+            </div>
+
+            <!-- 位置信息（获取当前位置） -->
+            <div class="form-group location-group">
+                <label for="location">Location</label>
+                <div class="location-input">
+                    <input type="text" id="location" placeholder="点击定位图标获取当前位置" readonly>
+                    <button type="button" class="location-btn" id="getLocation">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 地图显示弹窗 -->
+            <div id="mapModal" class="map-modal" style="display: none;">
+                <div class="map-modal-content">
+                    <div class="map-modal-header">
+                        <h3>当前位置</h3>
+                        <button type="button" class="close-btn" id="closeMap">&times;</button>
+                    </div>
+                    <div class="map-container">
+                        <div id="map" style="height: 400px; width: 100%;"></div>
+                    </div>
+                    <div class="map-modal-footer">
+                        <div class="selected-address">
+                            <strong>当前地址：</strong>
+                            <span id="selectedAddress">正在获取位置信息...</span>
+                        </div>
+                        <div class="map-buttons">
+                            <button type="button" class="btn-confirm" id="confirmLocation">确认使用此位置</button>
+                            <button type="button" class="btn-cancel" id="cancelLocation">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="form-group">
+                <label for="workDescription">工作简述</label>
+                <textarea id="workDescription" rows="3" placeholder="请输入工作简述"></textarea>
+            </div>
+
+            <div class="date-group">
+                <div class="form-group">
+                    <label for="startDate">开工日期</label>
+                    <input type="date" id="startDate">
+                </div>
+                <div class="form-group">
+                    <label for="actualStartDate">实际开工日期</label>
+                    <input type="date" id="actualStartDate">
+                </div>
+            </div>
+
+            <div class="date-group">
+                <div class="form-group">
+                    <label for="endDate">完工日期</label>
+                    <input type="date" id="endDate">
+                </div>
+                <div class="form-group">
+                    <label for="actualEndDate">实际完工日期</label>
+                    <input type="date" id="actualEndDate">
+                </div>
+            </div>
+
+            <!-- 选项组（圆形复选框） -->
+            <div class="options-group">
+                <div class="options-container">
+                    <div class="options-content">
+                        <label class="option-item">
+                            <input type="radio" name="workType" value="normal">
+                            <span class="custom-checkbox"></span>
+                            <span class="option-text">Normal works</span>
+                        </label>
+                    </div>
+                    <div class="options-content">
+                        <label class="option-item">
+                            <input type="radio" name="workType" value="ueFactor">
+                            <span class="custom-checkbox"></span>
+                            <span class="option-text">U&E Factor</span>
+                        </label>
+                    </div>
+                    <div class="options-content">
+                        <label class="option-item">
+                            <input type="radio" name="workType" value="adjustedUEFactor">
+                            <span class="custom-checkbox"></span>
+                            <span class="option-text">Adjusted U&E Factor</span>
+                        </label>    
+                    </div>
+                </div>
+                <div class="options-container">
+                    <div class="options-content">
+                        <label class="option-item">
+                            <input type="radio" name="pipeType" value="exposed">
+                            <span class="custom-checkbox"></span>
+                            <span class="option-text">明喉</span>
+                        </label>
+                    </div>
+                    <div class="options-content">      
+                    <label class="option-item">
+                        <input type="radio" name="pipeType" value="hidden">
+                        <span class="custom-checkbox"></span>
+                        <span class="option-text">藏喉</span>
+                    </label>
+                    </div>
+                    <div class="options-content"> 
+                    <label class="option-item">
+                        <input type="radio" name="pipeType" value="mixed">
+                        <span class="custom-checkbox"></span>
+                        <span class="option-text">混合</span>
+                    </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 上传附件区域 -->
+            <div class="upload-section">
+                <div class="upload-controls">
+                    <!-- 上传按钮 -->
+                    <button type="button" class="upload-btn" id="uploadBtn">
+                        <i class="fas fa-upload"></i> 上传附件
+                    </button>
+
+                    <div class="attachment-list" id="attachmentList">
+                        <span>需上传现场site sketch及现场照片</span>
+                    </div>
+                </div>
+                
+                <!-- 图片网格 (初始隐藏) -->
+                <div class="thumbnail-grid" id="thumbnailGrid" style="display: none;">
+                    <!-- 图片槽位将由JavaScript动态生成 -->
+                </div>
+                
+                <!-- 隐藏的文件输入 -->
+                <input type="file" id="fileInput" accept="*" style="display: none;">
+            </div>
+
+            <!-- 附件大图显示弹窗 -->
+            <div id="imagePreviewModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-btn" id="closePreview">&times;</span>
+                    <img id="previewImage" src="" alt="预览图片" style="max-width: 100%; max-height: 80vh;">
+                    <div class="image-info">
+                        <span id="imageName"></span>
+                        <button class="download-btn" id="downloadFromPreview">
+                            <i class="fas fa-download"></i> 下载
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 下一页按钮 -->
+            <div class="form-footer">
+                <button type="button" class="next-btn" id="nextBtn">
+                    下一页 <i class="fas fa-angle-right"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript代码 -->
+    <script>
+        let currentPreviewFile = null;
+        // 1. 更新时间显示功能
+        function updateTime() {
+            const now = new Date();
+            // 格式化时间为24小时制 (HH:mm)
+            const timeStr = now.toLocaleTimeString('zh-CN', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false
+            });
+            // 格式化日期为YYYY-MM-DD
+            const dateStr = now.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            }).replace(/\//g, '-');
+            // 更新显示
+            document.getElementById('currentTime').textContent = `${dateStr} ${timeStr}`;
+        }
+        
+        // 页面加载时立即更新时间，然后每分钟更新一次
+        updateTime();
+        setInterval(updateTime, 60000);
+
+        // 添加防抖函数
+        function debounce(func, wait) {
+            let timeout;
+            return function() {
+                const context = this, args = arguments;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    func.apply(context, args);
+                }, wait);
+            };
+        }
+
+        // 修改事件监听
+        document.addEventListener('input', debounce(saveFormData, 500));
+        document.addEventListener('change', debounce(saveFormData, 500));    
+    
+        // 2. 获取当前位置功能
+        let map = null;
+        let marker = null;
+        let currentLocation = null;
+
+        document.getElementById('getLocation').addEventListener('click', function() {
+            document.getElementById('mapModal').style.display = 'flex';
+            document.getElementById('selectedAddress').textContent = '正在获取位置信息...';
+            getCurrentLocation();
+        });
+
+        // 获取当前位置
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+
+                        // 初始化地图并显示当前位置
+                        initMapWithLocation(lng, lat);
+
+                        // 逆地理编码获取详细地址
+                        getAddressFromCoords(lng, lat);
+                    },
+                    function(error) {
+                        alert('获取位置失败: ' + error.message + '\n请确保允许浏览器访问位置信息');
+                        document.getElementById('mapModal').style.display = 'none';
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 60000
+                    }
+                );
+            } else {
+                alert('您的浏览器不支持地理定位功能');
+                document.getElementById('mapModal').style.display = 'none';
+            }
+        }
+
+        // 初始化地图并显示指定位置
+        function initMapWithLocation(lng, lat) {
+            if (map) {
+                map.destroy(); // 销毁之前的地图实例
+            }
+
+            map = new AMap.Map('map', {
+                zoom: 16,
+                center: [lng, lat],
+                mapStyle: 'amap://styles/normal'
+            });
+
+            // 清除之前的标记
+            if (marker) {
+                map.remove(marker);
+            }
+
+            // 添加当前位置标记
+            marker = new AMap.Marker({
+                position: [lng, lat],
+                map: map,
+                icon: new AMap.Icon({
+                    size: new AMap.Size(25, 34),
+                    image: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png'
+                })
+            });
+
+            currentLocation = { lng: lng, lat: lat };
+        }
+
+        // 根据坐标获取详细地址
+        function getAddressFromCoords(lng, lat) {
+            const geocoder = new AMap.Geocoder({
+                radius: 1000,
+                extensions: 'all'
+            });
+
+            geocoder.getAddress([lng, lat], function(status, result) {
+                if (status === 'complete' && result.regeocode) {
+                    const regeocode = result.regeocode;
+                    let address = '';
+
+                    // 优先使用格式化地址
+                    if (regeocode.formattedAddress) {
+                        address = regeocode.formattedAddress;
+                    } else if (regeocode.addressComponent) {
+                        // 如果没有格式化地址，手动构建
+                        const addr = regeocode.addressComponent;
+                        const parts = [];
+                        if (addr.province && addr.province !== addr.city) parts.push(addr.province);
+                        if (addr.city) parts.push(addr.city);
+                        if (addr.district) parts.push(addr.district);
+                        if (addr.township) parts.push(addr.township);
+                        if (addr.street) parts.push(addr.street);
+                        if (addr.streetNumber) parts.push(addr.streetNumber);
+                        address = parts.join('');
+                    }
+
+                    // 如果地址为空，使用POI信息
+                    if (!address && regeocode.pois && regeocode.pois.length > 0) {
+                        const poi = regeocode.pois[0];
+                        address = poi.name + '附近';
+                    }
+
+                    // 最后的备选方案
+                    if (!address) {
+                        address = `位置: ${lng.toFixed(4)}, ${lat.toFixed(4)}`;
+                    }
+
+                    console.log('获取到的地址:', address);
+                    document.getElementById('selectedAddress').textContent = address;
+                    currentLocation.address = address;
+                } else {
+                    console.log('地理编码失败:', status, result);
+                    const fallbackAddress = `位置: ${lng.toFixed(4)}, ${lat.toFixed(4)}`;
+                    document.getElementById('selectedAddress').textContent = fallbackAddress;
+                    currentLocation.address = fallbackAddress;
+                }
+            });
+        }
+
+        // 关闭地图弹窗
+        document.getElementById('closeMap').addEventListener('click', function() {
+            document.getElementById('mapModal').style.display = 'none';
+        });
+
+        document.getElementById('cancelLocation').addEventListener('click', function() {
+            document.getElementById('mapModal').style.display = 'none';
+        });
+
+        // 确认使用当前位置
+        document.getElementById('confirmLocation').addEventListener('click', function() {
+            if (currentLocation && currentLocation.address) {
+                document.getElementById('location').value = currentLocation.address;
+                document.getElementById('mapModal').style.display = 'none';
+            } else {
+                alert('位置信息获取失败，请重试');
+            }
+        });
+
+        // 3. 文件上传和下载功能
+        const uploadBtn = document.getElementById('uploadBtn');
+        const thumbnailGrid = document.getElementById('thumbnailGrid');
+        const fileInput = document.getElementById('fileInput');
+        const uploadedFiles = [];  // 存储上传的文件
+
+        // 上传按钮点击事件
+        uploadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('上传按钮被点击');
+
+            fileInput.click();
+        });
+
+        // 文件选择处理
+        fileInput.addEventListener('change', function(e) {
+            console.log('文件选择事件触发');
+            const file = e.target.files[0];
+            if (!file) {
+                console.log('没有选择文件');
+                return;
+            }
+
+            console.log('选择的文件:', file.name, file.type);
+
+            // 找到第一个空位置
+            let index = uploadedFiles.findIndex(f => !f);
+            if (index === -1) {
+                index = uploadedFiles.length;
+            }
+
+            // 存储文件
+            uploadedFiles[index] = file;
+
+            // 创建新的槽位
+            const slot = document.createElement('div');
+            slot.className = 'thumbnail-slot';
+            slot.dataset.index = index;
+
+            // 检查是否是图片文件
+            if (file.type.startsWith('image/')) {
+                console.log('处理图片文件');
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    console.log('图片读取完成');
+                    // 创建图片元素
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.className = 'thumbnail';
+                    // 添加点击预览事件
+                    img.addEventListener('click', function() {
+                        openImagePreview(file, e.target.result);
+                    });
+
+                    slot.appendChild(img);
+
+                    // 添加删除按钮
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.className = 'delete-btn';
+                    deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+                    deleteBtn.title = '删除附件';
+                    deleteBtn.onclick = (event) => {
+                        event.stopPropagation();
+                        deleteFile(index);
+                    };
+                    slot.appendChild(deleteBtn);
+
+                    // 添加下载按钮
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'download-btn';
+                    downloadBtn.innerHTML = '<i class="fas fa-download"></i>';
+                    downloadBtn.title = '下载附件';
+                    downloadBtn.onclick = (event) => {
+                        event.stopPropagation();
+                        downloadFile(file);
+                    };
+                    slot.appendChild(downloadBtn);
+
+                    // 更新显示
+                    updateDisplay();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                console.log('处理非图片文件');
+                // 显示文件图标
+                const fileIcon = document.createElement('div');
+                fileIcon.className = 'file-icon';
+                fileIcon.innerHTML = '<i class="fas fa-file"></i>';
+                slot.appendChild(fileIcon);
+
+                // 添加删除按钮
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+                deleteBtn.title = '删除附件';
+                deleteBtn.onclick = (event) => {
+                    event.stopPropagation();
+                    deleteFile(index);
+                };
+                slot.appendChild(deleteBtn);
+
+                // 添加下载按钮
+                const downloadBtn = document.createElement('button');
+                downloadBtn.className = 'download-btn';
+                downloadBtn.innerHTML = '<i class="fas fa-download"></i>';
+                downloadBtn.title = '下载附件';
+                downloadBtn.onclick = (event) => {
+                    event.stopPropagation();
+                    downloadFile(file);
+                };
+                slot.appendChild(downloadBtn);
+
+                // 更新显示
+                updateDisplay();
+            }
+
+            // 将槽位添加到网格
+            thumbnailGrid.appendChild(slot);
+
+            this.value = ''; // 重置文件输入
+        });
+
+        // 删除文件函数
+        function deleteFile(index) {
+            // 从数组中删除文件
+            uploadedFiles[index] = null;
+
+            // 删除对应的槽位
+            const slot = document.querySelector(`.thumbnail-slot[data-index="${index}"]`);
+            if (slot) {
+                slot.remove();
+            }
+
+            // 更新显示
+            updateDisplay();
+
+            // 立即保存数据到 localStorage
+            saveFormData();
+        }
+
+        // 更新显示函数
+        function updateDisplay() {
+            // 更新附件列表
+            updateAttachmentList();
+
+            // 如果没有文件了，隐藏网格
+            const hasFiles = uploadedFiles.some(f => f);
+            if (!hasFiles) {
+                thumbnailGrid.style.display = 'none';
+            } else {
+                thumbnailGrid.style.display = 'grid';
+            }
+        }
+
+        // 下载文件函数
+        function downloadFile(file) {
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(file);
+            a.download = file.name;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        }
+
+        // 更新附件列表显示
+        function updateAttachmentList() {
+            const attachmentList = document.getElementById('attachmentList');
+            const files = uploadedFiles.filter(file => file !== null && file !== undefined);
+
+            if (files.length > 0) {
+                let fileNames = '已上传附件：';
+                files.forEach((file, actualIndex) => {
+                    // 找到文件在原数组中的真实索引
+                    const realIndex = uploadedFiles.findIndex(f => f === file);
+                    if (actualIndex > 0) fileNames += '; ';
+                    fileNames += `<span class="download-link" data-index="${realIndex}">${file.name}</span>`;
+                });
+                attachmentList.innerHTML = fileNames;
+
+                // 为下载链接添加点击事件
+                document.querySelectorAll('.download-link').forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const index = parseInt(this.getAttribute('data-index'));
+                        if (uploadedFiles[index]) {
+                            downloadFile(uploadedFiles[index]);
+                        }
+                    });
+                });
+            } else {
+                attachmentList.innerHTML = '<span>需上传现场site sketch及现场照片</span>';
+            }
+        }
+
+        // 4. 下一页按钮验证功能
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            // 必填字段验证
+            const requiredFields = [
+                { id: 'jobNo', name: 'Job No.' },
+                { id: 'location', name: 'Location' },
+            ];
+            
+            let isValid = true;
+            let errorMessage = '';
+            
+            
+        // 跳转到下一页type.html
+            window.location.href = 'type.html';
+        });
+
+        // 5. 数据保存和加载功能
+        function saveFormData() {
+            const formData = {
+                contractNo: document.getElementById('Contract No').value,
+                jobNo: document.getElementById('jobNo').value,
+                orderNo: document.getElementById('orderNo').value,
+                wsdForeman: document.getElementById('wsdForeman').value,
+                location: document.getElementById('location').value,
+                workDescription: document.getElementById('workDescription').value,
+                startDate: document.getElementById('startDate').value,
+                actualStartDate: document.getElementById('actualStartDate').value,
+                endDate: document.getElementById('endDate').value,
+                actualEndDate: document.getElementById('actualEndDate').value,
+                workType: document.querySelector('input[name="workType"]:checked')?.value || '',
+                pipeType: document.querySelector('input[name="pipeType"]:checked')?.value || '',
+                
+                uploadedFiles: uploadedFiles.filter(f => f).map(f => {
+                    // 将文件转换为base64字符串以便存储
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            resolve({
+                                name: f.name,
+                                type: f.type,
+                                size: f.size,
+                                data: e.target.result.split(',')[1] // 存储base64数据
+                            });
+                        };
+                        reader.readAsDataURL(f);
+                    });
+                })
+            };
+            // 等待所有文件转换完成
+            Promise.all(formData.uploadedFiles).then(files => {
+                formData.uploadedFiles = files;
+                localStorage.setItem('indexFormData', JSON.stringify(formData));
+            });
+        }
+
+        function loadFormData() {
+            const savedData = localStorage.getItem('indexFormData');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                document.getElementById('Contract No').value = formData.contractNo || '';
+                document.getElementById('jobNo').value = formData.jobNo || '';
+                document.getElementById('orderNo').value = formData.orderNo || '';
+                document.getElementById('wsdForeman').value = formData.wsdForeman || '';
+                document.getElementById('location').value = formData.location || '';
+                document.getElementById('workDescription').value = formData.workDescription || '';
+                document.getElementById('startDate').value = formData.startDate || '';
+                document.getElementById('actualStartDate').value = formData.actualStartDate || '';
+                document.getElementById('endDate').value = formData.endDate || '';
+                document.getElementById('actualEndDate').value = formData.actualEndDate || '';
+                document.getElementById('location').value = formData.location || '';
+
+                //单选按钮
+                if (formData.workType) {
+                    const workTypeRadio = document.querySelector(`input[name="workType"][value="${formData.workType}"]`);
+                    if (workTypeRadio) workTypeRadio.checked = true;
+                }
+
+                if (formData.pipeType) {
+                    const pipeTypeRadio = document.querySelector(`input[name="pipeType"][value="${formData.pipeType}"]`);
+                    if (pipeTypeRadio) pipeTypeRadio.checked = true;
+                }
+
+                // 恢复上传的文件,新增，目前无效
+                // 恢复上传的文件
+                if (formData.uploadedFiles && formData.uploadedFiles.length > 0) {
+                    // 清空当前文件数组和显示
+                    uploadedFiles.length = 0;
+                    thumbnailGrid.innerHTML = '';
+                    
+                    // 恢复每个文件
+                    formData.uploadedFiles.forEach((fileInfo, index) => {
+                        if (fileInfo) {
+                            // 将base64数据转换回文件对象
+                            const byteString = atob(fileInfo.data);
+                            const ab = new ArrayBuffer(byteString.length);
+                            const ia = new Uint8Array(ab);
+                            for (let i = 0; i < byteString.length; i++) {
+                                ia[i] = byteString.charCodeAt(i);
+                            }
+                            const blob = new Blob([ab], { type: fileInfo.type });
+                            const file = new File([blob], fileInfo.name, { type: fileInfo.type });
+                            
+                            // 存储文件对象
+                            uploadedFiles[index] = file;
+                            
+                            // 创建缩略图显示
+                            createThumbnailSlot(file, index);
+                        }
+                    });
+                    
+                    // 更新显示
+                    updateDisplay();
+                }
+            }
+        }
+
+        function createThumbnailSlot(file, index) {
+            const slot = document.createElement('div');
+            slot.className = 'thumbnail-slot';
+            slot.dataset.index = index;
+
+            if (file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.className = 'thumbnail';
+                
+                // 添加点击预览事件
+                img.addEventListener('click', function() {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        openImagePreview(file, e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                });
+                
+                slot.appendChild(img);
+            } else {
+                const fileIcon = document.createElement('div');
+                fileIcon.className = 'file-icon';
+                fileIcon.innerHTML = '<i class="fas fa-file"></i>';
+                slot.appendChild(fileIcon);
+            }
+
+            // 添加删除按钮
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+            deleteBtn.title = '删除附件';
+            deleteBtn.onclick = (event) => {
+                event.stopPropagation();
+                deleteFile(index);
+            };
+            slot.appendChild(deleteBtn);
+
+            // 添加下载按钮
+            const downloadBtn = document.createElement('button');
+            downloadBtn.className = 'download-btn';
+            downloadBtn.innerHTML = '<i class="fas fa-download"></i>';
+            downloadBtn.title = '下载附件';
+            downloadBtn.onclick = (event) => {
+                event.stopPropagation();
+                downloadFile(file);
+            };
+            slot.appendChild(downloadBtn);
+
+            thumbnailGrid.appendChild(slot);
+            return slot;
+        }
+
+        // 图片预览相关函数
+        function openImagePreview(file, dataUrl) {
+            currentPreviewFile = file;
+            const modal = document.getElementById('imagePreviewModal');
+            const previewImage = document.getElementById('previewImage');
+            const imageName = document.getElementById('imageName');
+            
+            previewImage.src = dataUrl;
+            imageName.textContent = file.name;
+            modal.style.display = 'flex';
+        }
+
+        // 关闭预览
+        document.getElementById('closePreview').addEventListener('click', function() {
+            document.getElementById('imagePreviewModal').style.display = 'none';
+        });
+
+        // 从预览下载
+        document.getElementById('downloadFromPreview').addEventListener('click', function() {
+            if (currentPreviewFile) {
+                downloadFile(currentPreviewFile);
+            }
+        });
+
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('imagePreviewModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        //附件数据清空
+        function cleanupUploadedFiles() {
+            const savedData = localStorage.getItem('indexFormData');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                if (formData.uploadedFiles) {
+                    formData.uploadedFiles = formData.uploadedFiles.filter(f => f);
+                    localStorage.setItem('indexFormData', JSON.stringify(formData));
+                }
+            }
+        }
+
+
+        // 6. 返回按钮功能
+        document.getElementById('backBtn').addEventListener('click', function() {
+            alert('已经是第一页了');
+        });
+
+        // 7. 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFormData();
+            console.log('页面加载完成');
+        });
+
+        // 8. 实时保存数据
+        document.addEventListener('input', saveFormData);
+        document.addEventListener('change', saveFormData);
+    </script>
+</body>
+</html>

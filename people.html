@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MH Site Record</title>
+    <link rel="stylesheet" href="people.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="time" id="currentTime"></div>
+            <h1><i class="fas fa-angle-left" id="backBtn" style="cursor: pointer;"></i> MH Site Record</h1>
+        </header>
+
+        <form>
+            <!-- 工作工人部分 -->
+            <div class="section-container">
+                <h2>工作工人</h2>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">男什工</span>
+                    </div>
+                    <div class="quantity-section">
+                        <div class="quantity-control">
+                            <span class="quantity-label">数量：</span>
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">女什工</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">泥工</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">石屎工</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">木工</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">喉工</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">焊工</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">大偈</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">機手</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">司機</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row">
+                    <div class="worker-name">
+                        <span class="worker-label">開關水制工</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="worker-row worker-row-other">
+                    <div class="worker-name">
+                        <span class="worker-label">其他：</span>
+                        <input type="text" class="input-other" placeholder="请填写工种">
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间：</span>
+                        <div class="time-period-control">
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input start-datetime" placeholder="开始时间">
+                            </div>
+                            <span class="time-separator">至</span>
+                            <div class="datetime-row">
+                                <input type="datetime-local" class="datetime-input end-datetime" placeholder="结束时间">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- 使用机械部分 -->
+            <div class="section-container">
+                <h2>使用机械</h2>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">貨車</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">吊車</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">2"水泵</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">4"/6"水素</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">電泵</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">發電機</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">大發電機</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">照明燈</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">挖泥機</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">風機</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">焊機</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">風煤</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="machine-row">
+                    <div class="worker-name">
+                        <span class="machine-label">夾車</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作时间 (h)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- 熗调牌部分 -->
+            <div class="section-container">
+                <h2>熗调牌</h2>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">公众道歉牌</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">大小：</span>
+                        <div class="size-selection">
+                            <label class="size-option">
+                                <input type="radio" name="apology-size-1" value="large">
+                                <span class="radio-custom"></span>
+                                <span class="size-label">大</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="radio" name="apology-size-1" value="small">
+                                <span class="radio-custom"></span>
+                                <span class="size-label">小</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">(路面)停工牌</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">大小：</span>
+                        <div class="size-selection">
+                            <label class="size-option">
+                                <input type="radio" name="apology-size-2" value="large">
+                                <span class="radio-custom"></span>
+                                <span class="size-label">大</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="radio" name="apology-size-2" value="small">
+                                <span class="radio-custom"></span>
+                                <span class="size-label">小</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">(掘坑)停工牌</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">大小：</span>
+                        <div class="size-selection">
+                            <label class="size-option">
+                                <input type="radio" name="apology-size-3" value="large">
+                                <span class="radio-custom"></span>
+                                <span class="size-label">大</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="radio" name="apology-size-3" value="small">
+                                <span class="radio-custom"></span>
+                                <span class="size-label">小</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">閃燈</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">雪糕筒</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">鐵攔河</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">圓型交通牌</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">三角型交通牌</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">交通燈</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">方型交通牌</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">膠欄河</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">水馬</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="apology-row apology-row-simple">
+                    <div class="worker-name">
+                        <span class="apology-label">箭嘴燈車</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量（架）：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <!-- 空白区域 -->
+                    </div>
+                </div>
+                <div class="apology-row">
+                    <div class="worker-name">
+                        <span class="apology-label">箭嘴燈架</span>
+                    </div>
+                    <div class="quantity-section">
+                        <span class="quantity-label">数量：</span>
+                        <div class="quantity-control">
+                            <button type="button" class="quantity-btn minus-btn">-</button>
+                            <input type="number" class="quantity-input" value="0" min="0">
+                            <button type="button" class="quantity-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                    <div class="hours-section">
+                        <span class="hours-label">工作天数 (日)：</span>
+                        <div class="hours-control">
+                            <button type="button" class="hours-btn minus-btn">-</button>
+                            <input type="number" class="hours-input" value="0" min="0" step="0.5">
+                            <button type="button" class="hours-btn plus-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+    
+            <!-- 导航按钮 -->
+            <div class="form-footer">
+                <button type="button" class="prev-btn" id="prevBtn">
+                    <i class="fas fa-angle-left"></i> 上一页
+                </button>
+                <button type="button" class="next-btn" id="nextBtn">
+                    完成 <i class="fas fa-angle-right"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('zh-CN', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: false
+            });
+            const dateStr = now.toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            }).replace(/\//g, '-');
+
+            const timeElement = document.getElementById('currentTime');
+            // 检查屏幕宽度，小屏幕只显示时间
+            if (window.innerWidth <= 768) {
+                timeElement.textContent = timeStr;
+            } else {
+                timeElement.textContent = `${dateStr} ${timeStr}`;
+            }
+        }
+        
+        updateTime();
+        setInterval(updateTime, 60000);
+
+        // 监听窗口大小变化，更新时间显示
+        window.addEventListener('resize', updateTime);
+    
+        // 数量增减按钮功能
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('quantity-btn')) {
+                const input = e.target.parentElement.querySelector('.quantity-input');
+                let value = parseInt(input.value);
+                
+                if (e.target.classList.contains('minus-btn')) {
+                    value = Math.max(value - 1, parseInt(input.min));
+                } else if (e.target.classList.contains('plus-btn')) {
+                    value = value + 1;
+                }
+                
+                input.value = value;
+            }
+            
+            if (e.target.classList.contains('hours-btn')) {
+                const input = e.target.parentElement.querySelector('.hours-input');
+                let value = parseFloat(input.value);
+                const step = parseFloat(input.step) || 1;
+                
+                if (e.target.classList.contains('minus-btn')) {
+                    value = Math.max(value - step, parseFloat(input.min));
+                } else if (e.target.classList.contains('plus-btn')) {
+                    value = value + step;
+                }
+                
+                input.value = value.toFixed(1);
+            }
+        });
+    
+        // 数据保存功能
+        function savePeopleFormData() {
+            const formData = {
+                workers: [],
+                machines: [],
+                signs: []
+            };
+
+            // 保存工作工人数据
+            document.querySelectorAll('.worker-row').forEach(row => {
+                const label = row.querySelector('.worker-label')?.textContent || '';
+                const quantity = row.querySelector('.quantity-input')?.value || '0';
+                const startTime = row.querySelector('.start-datetime')?.value || '';
+                const endTime = row.querySelector('.end-datetime')?.value || '';
+                const otherInput = row.querySelector('.input-other')?.value || '';
+
+                if (quantity !== '0' || otherInput) {
+                    formData.workers.push({
+                        type: label,
+                        quantity: quantity,
+                        startTime: startTime,
+                        endTime: endTime,
+                        other: otherInput
+                    });
+                }
+            });
+
+            // 保存机械数据
+            document.querySelectorAll('.machine-row').forEach(row => {
+                const label = row.querySelector('.machine-label')?.textContent || '';
+                const quantity = row.querySelector('.quantity-input')?.value || '0';
+                const hours = row.querySelector('.hours-input')?.value || '0';
+
+                if (quantity !== '0' || hours !== '0') {
+                    formData.machines.push({
+                        type: label,
+                        quantity: quantity,
+                        hours: hours
+                    });
+                }
+            });
+
+            // 保存标牌数据
+            document.querySelectorAll('.apology-row').forEach(row => {
+                const label = row.querySelector('.apology-label')?.textContent || '';
+                const quantity = row.querySelector('.quantity-input')?.value || '0';
+                const hours = row.querySelector('.hours-input')?.value || '0';
+                const size = row.querySelector('input[type="radio"]:checked')?.value || '';
+
+                if (quantity !== '0' || hours !== '0') {
+                    formData.signs.push({
+                        type: label,
+                        quantity: quantity,
+                        hours: hours,
+                        size: size
+                    });
+                }
+            });
+
+            localStorage.setItem('peopleFormData', JSON.stringify(formData));
+        }
+
+        // 返回按钮功能
+        document.getElementById('backBtn').addEventListener('click', function() {
+            savePeopleFormData();
+            window.location.href = 'type.html';
+        });
+
+        // 导航按钮事件
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            savePeopleFormData();
+            window.location.href = 'type.html';
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            savePeopleFormData();
+            window.location.href = 'summary.html';
+        });
+
+        // 加载保存的数据
+        function loadPeopleFormData() {
+            const savedData = localStorage.getItem('peopleFormData');
+            if (savedData) {
+                const formData = JSON.parse(savedData);
+                console.log('加载people页面数据:', formData);
+
+                // 恢复工作工人数据
+                if (formData.workers) {
+                    formData.workers.forEach(worker => {
+                        // 根据工种类型找到对应的行并恢复数据
+                        const rows = document.querySelectorAll('.worker-row');
+                        rows.forEach(row => {
+                            const label = row.querySelector('.worker-label')?.textContent || '';
+                            const otherInput = row.querySelector('.input-other');
+
+                            if ((worker.type === label) || (otherInput && worker.other)) {
+                                const quantityInput = row.querySelector('.quantity-input');
+                                const startDatetime = row.querySelector('.start-datetime');
+                                const endDatetime = row.querySelector('.end-datetime');
+
+                                if (quantityInput) quantityInput.value = worker.quantity || '0';
+                                if (startDatetime) startDatetime.value = worker.startTime || '';
+                                if (endDatetime) endDatetime.value = worker.endTime || '';
+                                if (otherInput && worker.other) otherInput.value = worker.other;
+                            }
+                        });
+                    });
+                }
+
+                // 恢复机械数据
+                if (formData.machines) {
+                    formData.machines.forEach(machine => {
+                        const rows = document.querySelectorAll('.machine-row');
+                        rows.forEach(row => {
+                            const label = row.querySelector('.machine-label')?.textContent || '';
+                            if (machine.type === label) {
+                                const quantityInput = row.querySelector('.quantity-input');
+                                const hoursInput = row.querySelector('.hours-input');
+
+                                if (quantityInput) quantityInput.value = machine.quantity || '0';
+                                if (hoursInput) hoursInput.value = machine.hours || '0';
+                            }
+                        });
+                    });
+                }
+
+                // 恢复标牌数据
+                if (formData.signs) {
+                    formData.signs.forEach(sign => {
+                        const rows = document.querySelectorAll('.apology-row');
+                        rows.forEach(row => {
+                            const label = row.querySelector('.apology-label')?.textContent || '';
+                            if (sign.type === label) {
+                                const quantityInput = row.querySelector('.quantity-input');
+                                const hoursInput = row.querySelector('.hours-input');
+                                const sizeRadio = row.querySelector(`input[value="${sign.size}"]`);
+
+                                if (quantityInput) quantityInput.value = sign.quantity || '0';
+                                if (hoursInput) hoursInput.value = sign.hours || '0';
+                                if (sizeRadio) sizeRadio.checked = true;
+                            }
+                        });
+                    });
+                }
+            }
+        }
+
+        // 页面加载时恢复数据
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPeopleFormData();
+        });
+
+        // 实时保存数据
+        document.addEventListener('input', savePeopleFormData);
+        document.addEventListener('change', savePeopleFormData);
+    </script>
+</body>
+</html>
