@@ -160,6 +160,63 @@
     </div>
 
     <script>
+        // 0. 会话管理 - 检测页面刷新并清空数据
+        function initSessionManagement() {
+            // 使用 performance.navigation.type 检测页面加载类型
+            const navigationType = performance.navigation ? performance.navigation.type :
+                                 (performance.getEntriesByType('navigation')[0] ?
+                                  performance.getEntriesByType('navigation')[0].type : 'navigate');
+
+            // 检测是否为刷新
+            const isRefresh = navigationType === 1 || navigationType === 'reload';
+
+            if (isRefresh) {
+
+                // 清空localStorage
+                localStorage.removeItem('indexFormData');
+                localStorage.removeItem('typeFormData');
+                localStorage.removeItem('peopleFormData');
+                localStorage.removeItem('sessionId');
+
+                // 重置页面表单
+                resetPageForm();
+
+                return true; // 返回true表示发生了刷新
+            } else {
+                // 正常导航，生成或维持会话ID
+                let sessionId = localStorage.getItem('sessionId');
+                if (!sessionId) {
+                    sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('sessionId', sessionId);
+                }
+                return false; // 返回false表示正常导航
+            }
+        }
+
+        // 重置页面表单
+        function resetPageForm() {
+            // 重置所有输入框
+            document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(input => {
+                input.value = '';
+            });
+
+            // 重置所有选择框
+            document.querySelectorAll('select').forEach(select => {
+                select.selectedIndex = 0;
+            });
+
+
+        }
+
+        // 页面导航时保持会话
+        function maintainSession() {
+            let sessionId = localStorage.getItem('sessionId');
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('sessionId', sessionId);
+            }
+        }
+
         // 更新时间显示
         function updateTime() {
             const now = new Date();
@@ -387,7 +444,10 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
-            loadTypeFormData();
+            const wasRefreshed = initSessionManagement(); // 先检查会话
+            if (!wasRefreshed) {
+                loadTypeFormData(); // 只有在非刷新情况下才加载数据
+            }
         });
 
 
@@ -396,17 +456,20 @@
         // 返回按钮功能
         document.getElementById('backBtn').addEventListener('click', function() {
             saveTypeFormData();
+            maintainSession(); // 维持会话
             window.location.href = 'index.html';
         });
 
         // 导航按钮事件
         document.getElementById('prevBtn').addEventListener('click', function() {
             saveTypeFormData();
+            maintainSession(); // 维持会话
             window.location.href = 'index.html';
         });
 
         document.getElementById('nextBtn').addEventListener('click', function() {
             saveTypeFormData();
+            maintainSession(); // 维持会话
             window.location.href = 'people.html';
         });
 

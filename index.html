@@ -203,6 +203,83 @@
     <!-- JavaScript代码 -->
     <script>
         let currentPreviewFile = null;
+
+        // 0. 会话管理 - 检测页面刷新并清空数据
+        function initSessionManagement() {
+            // 使用 performance.navigation.type 检测页面加载类型
+            // 0 = 正常导航, 1 = 刷新, 2 = 后退/前进
+            const navigationType = performance.navigation ? performance.navigation.type :
+                                 (performance.getEntriesByType('navigation')[0] ?
+                                  performance.getEntriesByType('navigation')[0].type : 'navigate');
+
+
+
+            // 检测是否为刷新
+            const isRefresh = navigationType === 1 || navigationType === 'reload';
+
+            if (isRefresh) {
+                // 清空localStorage
+                localStorage.removeItem('indexFormData');
+                localStorage.removeItem('typeFormData');
+                localStorage.removeItem('peopleFormData');
+                localStorage.removeItem('sessionId');
+
+                // 重置页面表单
+                resetPageForm();
+
+                return true; // 返回true表示发生了刷新
+            } else {
+                // 正常导航，生成或维持会话ID
+                let sessionId = localStorage.getItem('sessionId');
+                if (!sessionId) {
+                    sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                    localStorage.setItem('sessionId', sessionId);
+                }
+                return false; // 返回false表示正常导航
+            }
+        }
+
+        // 重置页面表单
+        function resetPageForm() {
+            // 重置所有输入框
+            document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(input => {
+                input.value = '';
+            });
+
+            // 重置所有单选按钮
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+
+            // 重置文件上传
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput) fileInput.value = '';
+
+            // 清空缩略图网格
+            const thumbnailGrid = document.getElementById('thumbnailGrid');
+            if (thumbnailGrid) {
+                thumbnailGrid.innerHTML = '';
+                thumbnailGrid.style.display = 'none';
+            }
+
+            // 重置附件列表显示
+            const attachmentList = document.getElementById('attachmentList');
+            if (attachmentList) {
+                attachmentList.innerHTML = '<span>需上传现场site sketch及现场照片</span>';
+            }
+
+
+        }
+
+        // 页面导航时保持会话（现在只需要确保有sessionId）
+        function maintainSession() {
+            let sessionId = localStorage.getItem('sessionId');
+            if (!sessionId) {
+                sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('sessionId', sessionId);
+            }
+        }
+
         // 1. 更新时间显示功能
         function updateTime() {
             const now = new Date();
@@ -597,6 +674,8 @@
             
             
         // 跳转到下一页type.html
+            saveFormData(); // 保存数据
+            maintainSession(); // 维持会话
             window.location.href = 'type.html';
         });
 
@@ -805,8 +884,10 @@
 
         // 7. 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', function() {
-            loadFormData();
-            console.log('页面加载完成');
+            const wasRefreshed = initSessionManagement(); // 先检查会话
+            if (!wasRefreshed) {
+                loadFormData(); // 只有在非刷新情况下才加载数据
+            }
         });
 
         // 8. 实时保存数据

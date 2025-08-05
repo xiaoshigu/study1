@@ -1,370 +1,478 @@
 /* 全局样式 */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Microsoft YaHei", Arial, sans-serif;
-    }
-    
-    body {
+}
+
+body {
     background-color: #f5f5f5;
     color: #333;
     line-height: 1.6;
     padding: 10px;
-    }
+}
 
-    .container {
+.container {
     max-width: 800px;
     margin: 0 auto;
     padding: 15px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    }
-    
-    /* 头部样式 */
-    header {
+}
+
+/* 头部样式 */
+header {
     margin-bottom: 20px;
     position: relative;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
-    }
-    
-    .time {
+}
+
+.time {
     position: absolute;
     top: 10px;
     right: 0;
     color: #666;
     font-size: 14px;
     font-weight: bold;
-    }
-    
-    h1 {
+}
+
+h1 {
     font-size: 24px;
     color: #333;
-    }
-    
-    h1 i {
+}
+
+h1 i {
     margin-right: 10px;
     color: #666;
-    }
-    
-    h2 {
+    cursor: pointer;
+}
+
+/* 章节样式 */
+.section {
+    margin-bottom: 30px;
+}
+
+h2 {
     font-size: 18px;
     color: #444;
     margin-bottom: 15px;
     padding-bottom: 5px;
-    border-bottom: 1px solid #eee;
-    }
-    
-    /* 行样式 */
-    .worker-row,
-    .machine-row,
-    .apology-row {
-    display: grid;
-    grid-template-columns: 1.2fr 1.5fr 3.5fr;
-    gap: 8px;
+    border-bottom: 2px solid #87CEEB; /* 改为浅蓝色 */
+}
+
+/* 工作工人样式 */
+.worker-item {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    padding: 10px;
+    margin-bottom: 8px;
+    padding: 8px;
     background-color: #f9f9f9;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid #e0e0e0;
-    }
+}
 
-    /* 工种名称区域 */
-    .worker-name {
+.worker-header {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    }
-
-    /* 数量区域 */
-    .quantity-section {
-    display: flex;
-    align-items: center;
-    gap: 1px;
-    }
-
-    /* 工作时间区域 */
-    .hours-section {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    }
-
-    /* 大小选择区域 */
-    .size-selection {
-    display: flex;
     gap: 15px;
-    align-items: center;
-    }
+}
 
-    .size-option {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    }
-
-    .radio-custom {
-    width: 16px;
-    height: 16px;
-    border: 2px solid #ddd;
-    border-radius: 50%;
-    position: relative;
-    }
-
-    .size-option input[type="radio"] {
-    display: none;
-    }
-
-    .size-option input[type="radio"]:checked + .radio-custom {
-    border-color: #2196F3;
-    }
-
-    .size-option input[type="radio"]:checked + .radio-custom::after {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background-color: #2196F3;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    }
-
-    /* 时间段选择样式 */
-    .time-period-control {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    justify-content: center;
-    flex-wrap: wrap;
-    }
-
-    .datetime-row {
-    display: flex;
-    align-items: center;
-    }
-
-    .datetime-input {
-    padding: 2px 3px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    font-size: 10px;
-    width: 115px;
-    }
-
-    .time-separator {
-    font-size: 11px;
-    color: #666;
-    margin: 0 3px;
-    white-space: nowrap;
-    }
-    
-    .worker-label,
-    .machine-label,
-    .apology-label {
+.worker-name {
     font-weight: bold;
-    color: #333;
-    font-size: 15px;
+    font-size: 14px;
+    color: white;
+    background-color: #2196F3;
+    padding: 3px 8px;
+    border-radius: 12px;
+    min-width: 60px;
     text-align: center;
-    }
+    flex-shrink: 0;
+}
 
-    .quantity-label,
-    .hours-label {
-    font-size: 12px;
-    color: #666;
-    font-weight: 500;
-    white-space: nowrap;
-    min-width: 50px;
-    }
+.time-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
 
-    /* 其他工种特殊样式 */
-    .worker-row-other .worker-name {
+/* 机械样式 */
+.machine-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+/* 熗调牌样式 */
+.sign-item {
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+/* 机械头部样式 */
+.machine-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 6px;
+}
+
+.machine-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    background-color: #2196F3; /* 改为与工作工人一样的颜色 */
+    padding: 3px 8px;
+    border-radius: 12px;
+    min-width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* 机械工作时间组样式 */
+.machine-item .hours-group {
     display: flex;
     align-items: center;
     gap: 8px;
+}
+
+/* 桌面端机械布局 - 与工作工人保持一致的响应式布局 */
+@media (min-width: 481px) {
+    .machine-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
     }
 
-    .input-other {
-    flex: 1;
-    padding: 4px 6px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 12px;
-    min-width: 80px;
-    max-width: 100px;
+    .machine-item .hours-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 
-    .input-other:focus {
-    outline: none;
-    border-color: #2196F3;
-    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+    /* 熗调牌桌面端布局 - 使用Grid布局实现固定列对齐 */
+    .sign-header {
+        display: grid !important;
+        grid-template-columns: auto 1fr 1fr;
+        align-items: center;
+        gap: 15px;
     }
-    
-    .quantity-label,
-    .hours-label {
+}
+
+
+
+.sign-name {
     font-weight: bold;
-    color: #555;
     font-size: 14px;
-    margin-left: 15px;
-    }
-    
-    /* 数量控制样式 */
-    .quantity-control,
-    .hours-control {
+    color: white;
+    background-color: #2196F3; /* 改为与工作工人一样的颜色 */
+    padding: 3px 8px;
+    border-radius: 12px;
+    min-width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* 熗调牌其他组样式 */
+.sign-item .size-group,
+.sign-item .days-group,
+.sign-item .empty-group {
     display: flex;
     align-items: center;
-    }
-    
-    .quantity-btn,
-    .hours-btn {
-    width: 26px;
-    height: 26px;
+    gap: 8px;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: nowrap;
+    flex-shrink: 1;
+    min-width: 0;
+}
+
+/* 控制组样式 */
+.quantity-group,
+.hours-group,
+.days-group {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+}
+
+.size-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+}
+
+.label {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+}
+
+/* 按钮样式 */
+.btn-minus,
+.btn-plus {
+    width: 24px;
+    height: 24px;
     border: 1px solid #ddd;
-    background-color: #f5f5f5;
+    background-color: #fff;
     font-size: 14px;
     cursor: pointer;
+    border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 3px;
-    }
-    
-    .quantity-btn:hover,
-    .hours-btn:hover {
-    background-color: #e0e0e0;
-    }
-    
-    .quantity-input,
-    .hours-input {
+    transition: background-color 0.2s;
+}
+
+.btn-minus:hover,
+.btn-plus:hover {
+    background-color: #f0f0f0;
+}
+
+/* 输入框样式 */
+.quantity,
+.qty,
+.hours,
+.days {
     width: 40px;
+    height: 24px;
     text-align: center;
-    margin: 0 3px;
-    padding: 3px;
     border: 1px solid #ddd;
     border-radius: 3px;
-    font-size: 13px;
-    }
+    font-size: 12px;
+}
 
-    /* 隐藏数字输入框的上下箭头 */
-    .quantity-input::-webkit-outer-spin-button,
-    .quantity-input::-webkit-inner-spin-button,
-    .hours-input::-webkit-outer-spin-button,
-    .hours-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    }
+.time-start,
+.time-end {
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 12px;
+    width: 85px;
+}
 
-    .quantity-input[type=number],
-    .hours-input[type=number] {
-    -moz-appearance: textfield;
-    }
+/* 隐藏时间输入框的年份显示 */
+.time-start::-webkit-datetime-edit-year-field,
+.time-end::-webkit-datetime-edit-year-field {
+    display: none;
+}
 
-   
-    /* 大小选择样式 */
-    .size-selection {
-    display: flex;
-    gap: 15px;
-    }
-    
-    .size-option {
+/* 只隐藏年份前的第一个分隔符 */
+.time-start::-webkit-datetime-edit-text:first-child,
+.time-end::-webkit-datetime-edit-text:first-child {
+    display: none;
+}
+
+.other-input {
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    background-color: #2196F3;
+    padding: 3px 8px;
+    border-radius: 12px;
+    width: 80px;
+    text-align: center;
+    flex-shrink: 0;
+    border: none;
+    box-sizing: border-box;
+    height: 24px;
+    line-height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.other-input::placeholder {
+    color: white;
+    opacity: 0.8;
+}
+
+.separator {
+    font-size: 12px;
+    color: #666;
+    font-weight: normal;
+}
+
+/* 单选按钮样式 - 采用index.html的样式 */
+.option-item {
     display: flex;
     align-items: center;
+    gap: 8px;
+    font-size: 12px;
     cursor: pointer;
-    }
-    
-    .size-option input[type="radio"] {
+}
+
+/* 隐藏原生复选框 */
+.option-item input[type="radio"] {
     display: none;
-    }
-    
-    .radio-custom {
+}
+
+/* 自定义圆形单选框 */
+.custom-checkbox {
     width: 18px;
     height: 18px;
     border: 2px solid #4CAF50;
     border-radius: 50%;
     margin-right: 8px;
     position: relative;
-    }
-    
-    .radio-custom::after {
+    display: inline-block;
+    vertical-align: middle;
+    transition: all 0.3s;
+}
+
+/* 选中状态样式 */
+.option-item input[type="radio"]:checked + .custom-checkbox {
+    border-color: #4CAF50;
+}
+
+.option-item input[type="radio"]:checked + .custom-checkbox::after {
     content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
     width: 10px;
     height: 10px;
     background-color: #4CAF50;
     border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    opacity: 0;
-    transition: opacity 0.2s;
-    }
-    
-    .size-option input[type="radio"]:checked + .radio-custom::after {
-    opacity: 1;
-    }
-    
-    .size-label {
-    font-size: 14px;
-    }
-    
-    /* 表单页脚 */
-    .form-footer {
+}
+
+.option-text {
+    font-size: 12px;
+    color: #333;
+}
+
+/* 其他工种特殊样式 */
+.other-worker .worker-header {
+    align-items: flex-start;
+}
+
+.other-worker .other-input {
+    margin-bottom: 5px;
+}
+
+/* 页脚样式 */
+.footer {
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid #eee;
     display: flex;
     justify-content: space-between;
-    }
-    
-    .prev-btn, .next-btn {
-    padding: 10px 20px;
-    border-radius: 4px;
+}
+
+.btn-prev,
+.btn-next {
+    padding: 12px 24px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    gap: 8px;
     transition: background-color 0.3s;
-    }
-    
-    .prev-btn {
+}
+
+.btn-prev {
     background-color: #f0f0f0;
     color: #333;
     border: 1px solid #ddd;
-    }
-    
-    .prev-btn:hover {
+}
+
+.btn-prev:hover {
     background-color: #e0e0e0;
-    }
-    
-    .next-btn {
-    background-color: #00BFFF;
+}
+
+.btn-next {
+    background-color: #2196F3;
     color: white;
     border: none;
+}
+
+.btn-next:hover {
+    background-color: #1976D2;
+}
+
+/* 隐藏数字输入框的上下箭头 */
+.quantity::-webkit-outer-spin-button,
+.quantity::-webkit-inner-spin-button,
+.hours::-webkit-outer-spin-button,
+.hours::-webkit-inner-spin-button,
+.days::-webkit-outer-spin-button,
+.days::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantity[type=number],
+.qty[type=number],
+.hours[type=number],
+.days[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* 工作工人部分响应式设计 - 560px以下切换到手机端格式 */
+@media (max-width: 560px) {
+    /* 工作工人手机端优化 */
+    .worker-item {
+        padding: 6px;
+        margin-bottom: 6px;
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .next-btn:hover {
-    background-color: #0099CC;
+    .worker-header {
+        justify-content: flex-start;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 4px;
     }
-    
-    .prev-btn i {
-    margin-right: 8px;
+
+    .worker-name {
+        font-size: 12px;
+        padding: 2px 6px;
+        min-width: 50px;
     }
-    
-    .next-btn i {
-    margin-left: 8px;
+
+    .quantity-group {
+        gap: 2px;
     }
-    
-    /* 响应式调整 */
-    @media (max-width: 768px) {
+
+    .time-group {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 3px;
+    }
+
+    .time-start,
+    .time-end {
+        width: 75px;
+        font-size: 11px;
+        padding: 3px;
+    }
+}
+
+/* 机械和熗调牌响应式设计 - 490px以下切换到手机端格式 */
+@media (max-width: 490px) {
     body {
         padding: 5px;
-        font-size: 16px; /* 增加基础字体大小 */
     }
 
     .container {
@@ -372,166 +480,161 @@
         margin: 0;
         border-radius: 0;
         box-shadow: none;
-        min-height: 100vh;
     }
 
     h1 {
         font-size: 20px;
-        padding-right: 40px; /* 为时间显示留出空间 */
+        padding-right: 60px;
     }
 
     .time {
-        font-size: 14px; /* 稍微增大时间字体 */
         font-size: 12px;
         top: 5px;
     }
 
-    .worker-row,
-    .machine-row,
-    .apology-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1.5fr; /* 调整三列比例 */
-        gap: 8px;
-        align-items: center;
-        padding: 10px;
-        margin-bottom: 10px;
-    }
 
-    .worker-name,
-    .quantity-section,
-    .hours-section {
-        width: 100%;
-        justify-content: flex-start;
-    }
 
-    .quantity-section,
-    .hours-section {
+    /* 机械手机端优化 */
+    .machine-item {
+        padding: 6px;
+        margin-bottom: 6px;
         flex-direction: column;
-        gap: 8px;
+        align-items: stretch;
     }
 
-    .size-selection {
-        justify-content: center;
-    }
-
-    .time-period-control {
-        flex-direction: row; /* 保持水平排列 */
-        gap: 5px;
+    .machine-header {
+        justify-content: flex-start;
         align-items: center;
-        flex-wrap: wrap;
-        margin-top: 8px;
+        gap: 20px;
+        margin-bottom: 4px;
     }
 
-    .datetime-row {
-        flex: 1;
-        min-width: 140px; /* 确保日期输入框有足够宽度 */
+    .machine-name {
+        font-size: 12px;
+        padding: 2px 6px;
+        min-width: 45px;
     }
 
-    .datetime-input {
+    .machine-item .hours-group {
+        justify-content: flex-start;
         width: 100%;
-        padding: 8px;
-        font-size: 14px;
-        height: 36px;
     }
 
-    .time-separator {
-        margin: 5px 0;
-        font-size: 14px;
-    }
-
-    .worker-label,
-    .machine-label,
-    .apology-label {
-        font-size: 16px;
-        font-weight: bold;
-        width: 100%;
-        margin-bottom: 8px;
-        color: #333;
-       /* display: block;  独占一行 */
-    }
-
-    .quantity-label,
-    .hours-label {
-        font-size: 14px;
-        margin: 8px 0 4px 0;
-        color: #555;
-    }
-
-    .quantity-control,
-    .hours-control {
-        width: 100%;
-        justify-content: center;
-        margin: 8px 0;
-    }
-
-    .quantity-btn,
-    .hours-btn {
-        width: 36px; /* 稍微减小按钮大小 */
-        height: 36px;
-        font-size: 16px;
-        background-color: #fff;
-    }
-
-    .quantity-input,
-    .hours-input {
-        width: 60px; /* 减小输入框宽度 */
-        height: 36px;
-        font-size: 16px;
-        margin: 0 5px;
-    }
-
-    .worker-row-other .worker-name {
+    /* 熗调牌手机端优化 - 与机械部分保持一致的布局 */
+    .sign-item {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
-        width: 100%;
+        padding: 6px;
+        margin-bottom: 6px;
     }
 
-    .input-other {
+    /* 使用flexbox包装，让sign-header内容可以换行 */
+    .sign-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
         width: 100%;
-        margin-bottom: 8px;
-        padding: 8px;
-        font-size: 14px;
-        margin-top: 5px;
+        row-gap: 2px; /* 减少行间距 */
     }
 
-    .size-selection {
+    /* 第一行：标牌名称和数量在同一行 */
+    .sign-header > .sign-name {
+        font-size: 12px;
+        padding: 2px 6px;
+        min-width: 45px;
+        order: 1;
+    }
+
+    .sign-header > .quantity-group {
         justify-content: flex-start;
-        gap: 15px;
-        margin-top: 8px;
+        order: 2;
+        flex: 1;
     }
 
-    .size-option {
+    /* 第二行：大小选择或工作天数 - 强制换行，减少间距 */
+    .sign-header > .size-group,
+    .sign-header > .days-group,
+    .sign-header > .empty-group {
+        order: 3;
+        flex-basis: 100%; /* 强制换行到新行 */
+        justify-content: flex-start;
+        margin-top: 0; /* 移除额外的margin */
+    }
+
+    .controls {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        flex-wrap: nowrap;
+        flex-shrink: 1;
+        min-width: 0;
+    }
+
+    /* 按钮和输入框手机端优化 */
+    .btn-minus,
+    .btn-plus {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+
+    .quantity,
+    .hours,
+    .days {
+        width: 35px;
+        height: 28px;
         font-size: 14px;
     }
 
-    .form-footer {
-        padding: 15px 0;
+    .label {
+        font-size: 11px;
+    }
+
+    /* 其他工种手机端优化 */
+    .other-worker .worker-header {
+        align-items: center;
+    }
+
+    .other-input {
+        min-width: 50px;
+        font-size: 12px;
+        padding: 2px 6px;
+    }
+
+    /* 页脚手机端优化 */
+    .footer {
         position: sticky;
         bottom: 0;
         background-color: white;
-        border-top: 1px solid #eee;
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-between;
+        padding: 15px 0;
+        margin: 20px -10px 0;
+        border-top: 2px solid #eee;
     }
 
-    .prev-btn,
-    .next-btn {
+    .btn-prev,
+    .btn-next {
         padding: 12px 20px;
         font-size: 16px;
-        margin: 0 5px;
-        min-width: 100px;
+    }
+}
+
+/* 极小屏幕优化 */
+@media (max-width: 360px) {
+    .time-start,
+    .time-end {
+        width: 120px;
     }
 
-    .section-container {
-        margin-bottom: 20px;
+    .controls {
+        flex-direction: column;
+        gap: 8px;
     }
 
-    h2 {
-        font-size: 18px;
-        margin-bottom: 15px;
-        padding: 10px 0;
-        border-bottom: 2px solid #2196F3;
+    .quantity-group,
+    .hours-group,
+    .days-group,
+    .size-group {
+        justify-content: center;
     }
 }
