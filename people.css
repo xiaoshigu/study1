@@ -82,7 +82,7 @@ h2 {
 }
 
 .worker-name {
-    font-weight: bold;
+    font-weight: normal;
     font-size: 14px;
     color: white;
     background-color: #2196F3;
@@ -130,7 +130,7 @@ h2 {
 }
 
 .machine-name {
-    font-weight: bold;
+    font-weight: normal;
     font-size: 14px;
     color: white;
     background-color: #2196F3; /* 改为与工作工人一样的颜色 */
@@ -145,36 +145,61 @@ h2 {
 .machine-item .hours-group {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 3px;
 }
 
-/* 桌面端机械布局 - 与工作工人保持一致的响应式布局 */
-@media (min-width: 481px) {
-    .machine-header {
-        display: flex;
+/* 机械部分桌面端布局 - 与工作工人部分保持一致 */
+@media (min-width: 491px) {
+    .machine-item {
+        display: grid !important;
+        grid-template-columns: 1fr auto;
         align-items: center;
-        gap: 15px;
+        gap: 10px;
+    }
+
+    .machine-header {
+        display: grid !important;
+        grid-template-columns: 90px 1fr;
+        align-items: center;
+        gap: 0px;
+        margin-bottom: 0 !important;
+        justify-items: start;
+    }
+
+    .machine-header .machine-name {
+        white-space: nowrap;
+    }
+
+    .machine-header .quantity-group {
+        justify-self: start;
     }
 
     .machine-item .hours-group {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+        justify-self: end;
+        white-space: nowrap;
     }
 
-    /* 熗调牌桌面端布局 - 使用Grid布局实现固定列对齐 */
+/* 熗调牌桌面端布局 - 使用Grid布局实现固定列对齐 */
     .sign-header {
         display: grid !important;
-        grid-template-columns: auto 1fr 1fr;
+        grid-template-columns: 100px 1fr auto;
         align-items: center;
-        gap: 15px;
+        gap: 10px;
+        justify-items: start;
+    }
+
+    /* 第三列右对齐 */
+    .sign-header > .size-group,
+    .sign-header > .days-group,
+    .sign-header > .empty-group {
+        justify-self: end;
     }
 }
 
 
 
 .sign-name {
-    font-weight: bold;
+    font-weight: normal;
     font-size: 14px;
     color: white;
     background-color: #2196F3; /* 改为与工作工人一样的颜色 */
@@ -191,7 +216,7 @@ h2 {
 .sign-item .empty-group {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 3px;
 }
 
 .controls {
@@ -217,9 +242,14 @@ h2 {
 .size-group {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 3px;
     flex-wrap: nowrap;
     flex-shrink: 0;
+}
+
+/* 给第二个选项添加左边距，让两个选项之间有间距 */
+.size-group .option-item:nth-child(3) {
+    margin-left: 25px;
 }
 
 .label {
@@ -264,11 +294,13 @@ h2 {
 
 .time-start,
 .time-end {
-    padding: 4px;
+    height: 24px;
+    padding: 0 4px;
     border: 1px solid #ddd;
     border-radius: 3px;
     font-size: 12px;
-    width: 85px;
+    width: 106px;
+    box-sizing: border-box;
 }
 
 /* 隐藏时间输入框的年份显示 */
@@ -503,9 +535,10 @@ h2 {
     }
 
     .machine-header {
-        justify-content: flex-start;
-        align-items: center;
-        gap: 20px;
+        display: flex !important;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
         margin-bottom: 4px;
     }
 
@@ -513,9 +546,11 @@ h2 {
         font-size: 12px;
         padding: 2px 6px;
         min-width: 45px;
+        align-self: flex-start;
     }
 
-    .machine-item .hours-group {
+    .machine-header .quantity-group,
+    .machine-header .hours-group {
         justify-content: flex-start;
         width: 100%;
     }
