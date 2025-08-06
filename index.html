@@ -34,6 +34,11 @@
             </div>
 
             <div class="form-group">
+                <label for="districtNo">District No.</label>
+                <input type="text" id="districtNo" placeholder="请输入内容">
+            </div>
+
+            <div class="form-group">
                 <label for="wsdForeman">WSD foreman</label>
                 <input type="text" id="wsdForeman" placeholder="请输入内容">
             </div>
@@ -685,6 +690,7 @@
                 contractNo: document.getElementById('Contract No').value,
                 jobNo: document.getElementById('jobNo').value,
                 orderNo: document.getElementById('orderNo').value,
+                districtNo: document.getElementById('districtNo').value,
                 wsdForeman: document.getElementById('wsdForeman').value,
                 location: document.getElementById('location').value,
                 workDescription: document.getElementById('workDescription').value,
@@ -725,6 +731,7 @@
                 document.getElementById('Contract No').value = formData.contractNo || '';
                 document.getElementById('jobNo').value = formData.jobNo || '';
                 document.getElementById('orderNo').value = formData.orderNo || '';
+                document.getElementById('districtNo').value = formData.districtNo || '';
                 document.getElementById('wsdForeman').value = formData.wsdForeman || '';
                 document.getElementById('location').value = formData.location || '';
                 document.getElementById('workDescription').value = formData.workDescription || '';

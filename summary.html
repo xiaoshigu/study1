@@ -36,6 +36,10 @@
                         <span id="orderNo">-</span>
                     </div>
                     <div class="info-item">
+                        <label>District No.:</label>
+                        <span id="districtNo">-</span>
+                    </div>
+                    <div class="info-item">
                         <label>WSD foreman:</label>
                         <span id="wsdForeman">-</span>
                     </div>
@@ -194,6 +198,7 @@
             document.getElementById('contractNo').textContent = '-';
             document.getElementById('jobNo').textContent = '-';
             document.getElementById('orderNo').textContent = '-';
+            document.getElementById('districtNo').textContent = '-';
             document.getElementById('wsdForeman').textContent = '-';
             document.getElementById('location').textContent = '-';
             document.getElementById('workDescription').textContent = '-';
@@ -258,6 +263,7 @@
             document.getElementById('contractNo').textContent = indexData.contractNo || '-';
             document.getElementById('jobNo').textContent = indexData.jobNo || '-';
             document.getElementById('orderNo').textContent = indexData.orderNo || '-';
+            document.getElementById('districtNo').textContent = indexData.districtNo || '-';
             document.getElementById('wsdForeman').textContent = indexData.wsdForeman || '-';
             document.getElementById('location').textContent = indexData.location || '-';
             document.getElementById('workDescription').textContent = indexData.workDescription || '-';
@@ -446,56 +452,56 @@
             section.innerHTML = html;
         }
 
-// 图片预览功能
-function openImagePreview(index) {
-    const files = JSON.parse(localStorage.getItem('indexFormData') || '{}').uploadedFiles || [];
-    if (index >= 0 && index < files.length && files[index].type.startsWith('image/')) {
-        currentPreviewFile = files[index];
-        const modal = document.getElementById('imagePreviewModal');
-        const previewImage = document.getElementById('previewImage');
-        const imageName = document.getElementById('imageName');
-        
-        previewImage.src = `data:${currentPreviewFile.type};base64,${currentPreviewFile.data}`;
-        imageName.textContent = currentPreviewFile.name;
-        modal.style.display = 'flex';
-    }
-}
-
-// 关闭预览
-document.getElementById('closePreview').addEventListener('click', function() {
-    document.getElementById('imagePreviewModal').style.display = 'none';
-});
-
-// 从预览下载
-document.getElementById('downloadFromPreview').addEventListener('click', function() {
-    if (currentPreviewFile) {
-        // 创建Blob对象
-        const byteString = atob(currentPreviewFile.data);
-        const ab = new ArrayBuffer(byteString.length);
-        const ia = new Uint8Array(ab);
-        for (let i = 0; i < byteString.length; i++) {
-            ia[i] = byteString.charCodeAt(i);
+        // 图片预览功能
+        function openImagePreview(index) {
+            const files = JSON.parse(localStorage.getItem('indexFormData') || '{}').uploadedFiles || [];
+            if (index >= 0 && index < files.length && files[index].type.startsWith('image/')) {
+                currentPreviewFile = files[index];
+                const modal = document.getElementById('imagePreviewModal');
+                const previewImage = document.getElementById('previewImage');
+                const imageName = document.getElementById('imageName');
+                
+                previewImage.src = `data:${currentPreviewFile.type};base64,${currentPreviewFile.data}`;
+                imageName.textContent = currentPreviewFile.name;
+                modal.style.display = 'flex';
+            }
         }
-        const blob = new Blob([ab], { type: currentPreviewFile.type });
-        
-        // 创建下载链接
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = currentPreviewFile.name;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(a.href);
-    }
-});
 
-// 点击模态框外部关闭
-window.addEventListener('click', function(event) {
-    const modal = document.getElementById('imagePreviewModal');
-    if (event.target === modal) {
-        modal.style.display = 'none';
-    }
-});
+        // 关闭预览
+        document.getElementById('closePreview').addEventListener('click', function() {
+            document.getElementById('imagePreviewModal').style.display = 'none';
+        });
+
+        // 从预览下载
+        document.getElementById('downloadFromPreview').addEventListener('click', function() {
+            if (currentPreviewFile) {
+                // 创建Blob对象
+                const byteString = atob(currentPreviewFile.data);
+                const ab = new ArrayBuffer(byteString.length);
+                const ia = new Uint8Array(ab);
+                for (let i = 0; i < byteString.length; i++) {
+                    ia[i] = byteString.charCodeAt(i);
+                }
+                const blob = new Blob([ab], { type: currentPreviewFile.type });
+                
+                // 创建下载链接
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = currentPreviewFile.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(a.href);
+            }
+        });
+
+        // 点击模态框外部关闭
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('imagePreviewModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
 
 
         // 3. 导出Excel功能
@@ -511,9 +517,17 @@ window.addEventListener('click', function(event) {
             // 基本信息
             allData.push(['=== 基本信息 ===']);
             allData.push(['Contract No.', document.getElementById('contractNo').textContent]);
+            allData.push(['Job No.', document.getElementById('jobNo').textContent]);
+            allData.push(['Order No.', document.getElementById('orderNo').textContent]);
+            allData.push(['District No.', document.getElementById('districtNo').textContent]);
+            allData.push(['WSD foreman', document.getElementById('wsdForeman').textContent]);
             allData.push(['Location', document.getElementById('location').textContent]);
             allData.push(['工作类型', document.getElementById('workType').textContent]);
             allData.push(['管道类型', document.getElementById('pipeType').textContent]);
+            allData.push(['开工日期', document.getElementById('startDate').textContent]);
+            allData.push(['实际开工日期', document.getElementById('actualStartDate').textContent]);
+            allData.push(['完工日期', document.getElementById('endDate').textContent]);
+            allData.push(['实际完工日期', document.getElementById('actualEndDate').textContent]);
             allData.push(['']); // 空行
 
             // 喉管信息
