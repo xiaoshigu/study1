@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -12,9 +12,9 @@
 <body>
     <div class="container">
         <header>
+            <h1><i class="fas fa-angle-left" id="backBtn" style="cursor: pointer;"></i> MH Site Record</h1>
             <!-- 右上角显示当前时间 -->
             <div class="time" id="currentTime"></div>
-            <h1><i class="fas fa-angle-left" id="backBtn" style="cursor: pointer;"></i> MH Site Record</h1>
         </header>
 
         <form>
@@ -58,8 +58,11 @@
             <div id="mapModal" class="map-modal" style="display: none;">
                 <div class="map-modal-content">
                     <div class="map-modal-header">
-                        <h3>当前位置</h3>
+                        <h3>选择位置</h3>
                         <button type="button" class="close-btn" id="closeMap">&times;</button>
+                    </div>
+                    <div class="map-instructions">
+                        <p><i class="fas fa-info-circle"></i> 您可以点击地图或拖拽标记来选择精确位置</p>
                     </div>
                     <div class="map-container">
                         <div id="map" style="height: 400px; width: 100%;"></div>
@@ -370,31 +373,69 @@
             }
         }
 
-        // 初始化地图并显示指定位置
+        // 初始化地图并显示指定位置 - 增强交互功能
         function initMapWithLocation(lng, lat) {
             if (map) {
                 map.destroy(); // 销毁之前的地图实例
             }
 
             map = new AMap.Map('map', {
-                zoom: 16,
+                zoom: 18, // 提高初始缩放级别，让用户看得更清楚
                 center: [lng, lat],
-                mapStyle: 'amap://styles/normal'
+                mapStyle: 'amap://styles/normal',
+                scrollWheel: true, // 允许鼠标滚轮缩放
+                doubleClickZoom: true, // 允许双击放大
+                dragEnable: true, // 允许拖拽
+                zoomEnable: true, // 允许缩放
+                minZoom: 10, // 最小缩放级别
+                maxZoom: 20 // 最大缩放级别
             });
+
+            // 添加缩放控件
+            const zoomControl = new AMap.ToolBar({
+                position: 'RB', // 右下角
+                ruler: false, // 不显示标尺
+                noIpLocate: true, // 不显示定位按钮
+                locate: false, // 不显示定位按钮
+                liteStyle: true, // 精简样式
+                direction: false // 不显示方向控件
+            });
+            map.addControl(zoomControl);
 
             // 清除之前的标记
             if (marker) {
                 map.remove(marker);
             }
 
-            // 添加当前位置标记
+            // 添加可拖拽的位置标记
             marker = new AMap.Marker({
                 position: [lng, lat],
                 map: map,
+                draggable: true, // 允许拖拽标记
                 icon: new AMap.Icon({
                     size: new AMap.Size(25, 34),
                     image: 'https://webapi.amap.com/theme/v1.3/markers/n/mark_b.png'
                 })
+            });
+
+            // 标记拖拽事件监听
+            marker.on('dragend', function(e) {
+                const position = e.target.getPosition();
+                currentLocation = { lng: position.lng, lat: position.lat };
+                getAddressFromCoords(position.lng, position.lat);
+            });
+
+            // 地图点击事件监听
+            map.on('click', function(e) {
+                const lng = e.lnglat.lng;
+                const lat = e.lnglat.lat;
+
+                // 移动标记到点击位置
+                marker.setPosition([lng, lat]);
+                currentLocation = { lng: lng, lat: lat };
+
+                // 获取新位置的地址
+                getAddressFromCoords(lng, lat);
             });
 
             currentLocation = { lng: lng, lat: lat };

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MH Site Record - 总结</title>
+    <title>MH Site Record</title>
     <link rel="stylesheet" href="summary.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- 引入SheetJS库用于Excel导出 -->
@@ -12,12 +12,12 @@
 <body>
     <div class="container">
         <header>
-            <div class="time" id="currentTime"></div>
             <h1><i class="fas fa-angle-left" id="backBtn" style="cursor: pointer;"></i> MH Site Record</h1>
+            <div class="time" id="currentTime"></div>
         </header>
 
         <div class="summary-content">
-            <h2>记录总结</h2>
+            <h2>汇总</h2>
 
             <!-- 基本信息 -->
             <div class="section">
@@ -317,7 +317,7 @@
                 return;
             }
 
-            let html = '<table class="data-table"><thead><tr><th>材质</th><th>直径</th><th>长度</th></tr></thead><tbody>';
+            let html = '<table class="data-table"><thead><tr><th>材质</th><th>管径(mm)</th><th>长度(m)</th></tr></thead><tbody>';
             pipeItems.forEach(item => {
                 if (item.material || item.diameter || item.length) {
                     html += `<tr><td>${item.material || '-'}</td><td>${item.diameter || '-'}</td><td>${item.length || '-'}</td></tr>`;
@@ -335,18 +335,39 @@
                 return;
             }
 
-            let html = '<table class="data-table"><thead><tr><th>类型</th><th>长度</th><th>宽度</th><th>深度</th><th>remark</th></tr></thead><tbody>';
-            roadItems.forEach(item => {
-                if (item.type || item.length || item.width || item.depth || item.remark) {
-                    html += `<tr>
-                        <td>${item.type || '-'}</td>
-                        <td>${item.length || '-'}</td>
-                        <td>${item.width || '-'}</td>
-                        <td>${item.depth || '-'}</td>
-                        <td>${item.remark || '-'}</td>
-                    </tr>`;
-                }
-            });
+            // 检测是否为手机端
+            const isMobile = window.innerWidth <= 768;
+            let html; // 在外部声明html变量
+
+            if (isMobile) {
+                // 手机端：调整列宽，保留remark列
+                html = '<table class="data-table road-table-mobile"><thead><tr><th>类型</th><th>长度(m)</th><th>宽度(m)</th><th>深度(m)</th><th>Remark</th></tr></thead><tbody>';
+                roadItems.forEach(item => {
+                    if (item.type || item.length || item.width || item.depth || item.remark) {
+                        html += `<tr>
+                            <td>${item.type || '-'}</td>
+                            <td>${item.length || '-'}</td>
+                            <td>${item.width || '-'}</td>
+                            <td>${item.depth || '-'}</td>
+                            <td>${item.remark || '-'}</td>
+                        </tr>`;
+                    }
+                });
+            } else {
+                // 桌面端：保持原有布局
+                html = '<table class="data-table"><thead><tr><th>类型</th><th>长度(m)</th><th>宽度(m)</th><th>深度(m)</th><th>Remark</th></tr></thead><tbody>';
+                roadItems.forEach(item => {
+                    if (item.type || item.length || item.width || item.depth || item.remark) {
+                        html += `<tr>
+                            <td>${item.type || '-'}</td>
+                            <td>${item.length || '-'}</td>
+                            <td>${item.width || '-'}</td>
+                            <td>${item.depth || '-'}</td>
+                            <td>${item.remark || '-'}</td>
+                        </tr>`;
+                    }
+                });
+            }
             html += '</tbody></table>';
             section.innerHTML = html;
         }
@@ -359,7 +380,7 @@
                 return;
             }
 
-            let html = '<table class="data-table"><thead><tr><th>类型</th><th>备注</th></tr></thead><tbody>';
+            let html = '<table class="data-table"><thead><tr><th>类型</th><th>Remark</th></tr></thead><tbody>';
             otherItems.forEach(item => {
                 if (item.type || item.remark) {
                     html += `<tr>
@@ -413,11 +434,12 @@
                 return;
             }
 
-            let html = '<table class="data-table"><thead><tr><th>标牌类型</th><th>数量</th><th>大小</th><th>工作时间</th></tr></thead><tbody>';
+            let html = '<table class="data-table"><thead><tr><th>标牌类型</th><th>数量</th><th>大小</th><th>工作天数(日)</th></tr></thead><tbody>';
             signs.forEach(sign => {
                 const size = sign.size === 'large' ? '大' : sign.size === 'small' ? '小' : '-';
-                const time = sign.hours ? `${sign.hours}h` : '-';
-                html += `<tr><td>${sign.type}</td><td>${sign.quantity}</td><td>${size}</td><td>${time}</td></tr>`;
+                // 只有当工作天数大于0时才显示，否则显示"-"
+                const days = (sign.days && parseFloat(sign.days) > 0) ? `${sign.days}日` : '-';
+                html += `<tr><td>${sign.type}</td><td>${sign.quantity}</td><td>${size}</td><td>${days}</td></tr>`;
             });
             html += '</tbody></table>';
             section.innerHTML = html;
@@ -522,19 +544,20 @@
             allData.push(['District No.', document.getElementById('districtNo').textContent]);
             allData.push(['WSD foreman', document.getElementById('wsdForeman').textContent]);
             allData.push(['Location', document.getElementById('location').textContent]);
-            allData.push(['工作类型', document.getElementById('workType').textContent]);
-            allData.push(['管道类型', document.getElementById('pipeType').textContent]);
+            allData.push(['工作简述', document.getElementById('workDescription').textContent]);
             allData.push(['开工日期', document.getElementById('startDate').textContent]);
             allData.push(['实际开工日期', document.getElementById('actualStartDate').textContent]);
             allData.push(['完工日期', document.getElementById('endDate').textContent]);
             allData.push(['实际完工日期', document.getElementById('actualEndDate').textContent]);
+            allData.push(['工作类型', document.getElementById('workType').textContent]);
+            allData.push(['管道类型', document.getElementById('pipeType').textContent]);
             allData.push(['']); // 空行
 
             // 喉管信息
             const typeData = JSON.parse(localStorage.getItem('typeFormData') || '{}');
             allData.push(['=== 喉管信息 ===']);
             if (typeData.pipeItems && typeData.pipeItems.length > 0) {
-                allData.push(['材质', '直径', '长度']);
+                allData.push(['材质', '管径(mm)', '长度(m)']);
                 typeData.pipeItems.forEach(item => {
                     if (item.material || item.diameter || item.length) {
                         allData.push([item.material || '-', item.diameter || '-', item.length || '-']);
@@ -548,7 +571,7 @@
             // 路面事项
             allData.push(['=== 路面事项 ===']);
             if (typeData.roadItems && typeData.roadItems.length > 0) {
-                allData.push(['类型', '长度', '宽度', '深度', 'remark']);
+                allData.push(['类型', '长度(m)', '宽度(m)', '深度(m)', 'remark']);
                 typeData.roadItems.forEach(item => {
                     if (item.type || item.length || item.width || item.depth || item.remark) {
                         allData.push([
@@ -616,11 +639,12 @@
             // 标牌
             allData.push(['--- 标牌 ---']);
             if (peopleData.signs && peopleData.signs.length > 0) {
-                allData.push(['标牌类型', '数量', '大小', '工作时间']);
+                allData.push(['标牌类型', '数量', '大小', '工作天数']);
                 peopleData.signs.forEach(sign => {
                     const size = sign.size === 'large' ? '大' : sign.size === 'small' ? '小' : '-';
-                    const time = sign.hours ? `${sign.hours}h` : '-';
-                    allData.push([sign.type, sign.quantity, size, time]);
+                    // 只有当工作天数大于0时才显示，否则显示"-"
+                    const days = (sign.days && parseFloat(sign.days) > 0) ? `${sign.days}日` : '-';
+                    allData.push([sign.type, sign.quantity, size, days]);
                 });
             } else {
                 allData.push(['暂无数据']);
@@ -685,6 +709,15 @@
             if (!wasRefreshed) {
                 loadAllData(); // 只有在非刷新情况下才加载数据
             }
+        });
+
+        // 6. 监听窗口大小变化，重新渲染表格
+        window.addEventListener('resize', function() {
+            // 延迟执行，避免频繁触发
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(function() {
+                loadAllData(); // 重新加载数据以应用正确的表格布局
+            }, 300);
         });
     </script>
 </body>

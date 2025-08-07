@@ -1,55 +1,70 @@
-/* 全局样式 */
+/* 全局样式 - 商务风格浅色系 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Microsoft YaHei", Arial, sans-serif; /* 中文字体优先 */
+    font-family: "Microsoft YaHei", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 商务字体 */
 }
 
 body {
-    background-color: #f5f5f5;
-    color: #333;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #495057;
     line-height: 1.6;
     padding: 20px;
+    min-height: 100vh;
 }
 
-/* 主容器 */
+/* 主容器 - 低调奢华设计 */
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* 头部样式 */
+/* 头部样式 - 商务风格 */
 header {
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 24px;
+    padding: 16px 0;
+    border-bottom: 2px solid #e9ecef;
+    background: linear-gradient(90deg, rgba(108, 117, 125, 0.05) 0%, transparent 100%);
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
-/* 时间显示 */
+/* 时间显示 - 与标题基线对齐 */
 .time {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    color: #666;
-    font-size: 14px;
-    font-weight: bold;
+    color: #6c757d;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
 }
 
-/* 标题 */
+/* 标题 - 统一商务风格 */
 h1 {
     font-size: 24px;
-    color: #333;
+    color: #495057;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    margin: 0;
 }
 
 h1 i {
-    margin-right: 10px;
-    color: #666;
+    margin-right: 12px;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+h1 i:hover {
+    color: #495057;
 }
 
 /* 表单组样式 */
@@ -62,7 +77,7 @@ h1 i {
     margin-bottom: 5px;
     font-weight: bold;
     color: #555;
-    font-size: 14px;
+    font-size: 18px; /* 增大标签字体到18px */
 }
 
 .form-group input[type="text"],
@@ -147,8 +162,8 @@ h1 i {
 
 .options-header h4 {
     margin: 0;
-    color: #333;
-    font-size: 15px;
+    color: #555;
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -260,7 +275,7 @@ h1 i {
 /* 附件列表 */
 .attachment-list {
     color: #666;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 /* 缩略图网格布局 */
@@ -333,6 +348,7 @@ h1 i {
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s;
+    z-index: 10; /* 确保按钮在最上层 */
 }
 
 /* 删除按钮 */
@@ -352,11 +368,23 @@ h1 i {
     cursor: pointer;
     opacity: 0;
     transition: opacity 0.3s;
+    z-index: 10; /* 确保按钮在最上层 */
 }
 
 .thumbnail-slot:hover .download-btn,
 .thumbnail-slot:hover .delete-btn {
-    opacity: 1;
+    opacity: 1 !important; /* 强制显示，用于调试 */
+}
+
+/* 临时调试：让按钮始终可见 */
+.download-btn,
+.delete-btn {
+    opacity: 0.3; /* 临时设置为半透明，便于调试 */
+}
+
+.thumbnail-slot:hover .download-btn,
+.thumbnail-slot:hover .delete-btn {
+    opacity: 1 !important;
 }
 
 .download-btn i,
@@ -384,7 +412,7 @@ h1 i {
     padding: 8px 15px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     display: inline-flex;
     align-items: center;
     transition: background-color 0.3s;
@@ -453,8 +481,11 @@ h1 i {
 }
 
 .map-modal-content {
-    background: white;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     width: 90%;
     max-width: 600px;
     max-height: 80%;
@@ -462,8 +493,9 @@ h1 i {
 }
 
 .map-modal-header {
-    padding: 15px 20px;
-    border-bottom: 1px solid #eee;
+    padding: 20px 24px;
+    border-bottom: 2px solid #e9ecef;
+    background: linear-gradient(90deg, rgba(108, 117, 125, 0.05) 0%, transparent 100%);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -472,6 +504,9 @@ h1 i {
 .map-modal-header h3 {
     margin: 0;
     font-size: 18px;
+    color: #495057;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .close-btn {
@@ -479,20 +514,64 @@ h1 i {
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #666;
+    color: #6c757d;
+    transition: color 0.3s ease;
+    padding: 4px;
+    border-radius: 4px;
 }
 
 .close-btn:hover {
-    color: #333;
+    color: #495057;
+    background: rgba(108, 117, 125, 0.1);
+}
+
+.map-instructions {
+    padding: 12px 24px;
+    background: rgba(73, 80, 87, 0.05);
+    border-bottom: 1px solid #e9ecef;
+    color: #6c757d;
+    font-size: 13px;
+    text-align: center;
+}
+
+.map-instructions i {
+    color: #495057;
+    margin-right: 6px;
 }
 
 .map-container {
     padding: 0;
+    border-radius: 0 0 16px 16px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 地图控件商务风格样式 */
+.map-container .amap-toolbar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    margin: 10px !important;
+}
+
+.map-container .amap-toolbar .amap-btn {
+    background: transparent !important;
+    border: none !important;
+    color: #495057 !important;
+    transition: all 0.3s ease !important;
+}
+
+.map-container .amap-toolbar .amap-btn:hover {
+    background: rgba(73, 80, 87, 0.1) !important;
+    color: #495057 !important;
 }
 
 .map-modal-footer {
-    padding: 15px 20px;
-    border-top: 1px solid #eee;
+    padding: 20px 24px;
+    border-top: 2px solid #e9ecef;
+    background: rgba(248, 249, 250, 0.8);
 }
 
 .selected-address {
@@ -507,29 +586,36 @@ h1 i {
 }
 
 .btn-cancel, .btn-confirm {
-    padding: 8px 20px;
+    padding: 10px 24px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
 }
 
 .btn-cancel {
-    background-color: #f5f5f5;
-    color: #666;
+    background: rgba(108, 117, 125, 0.1);
+    color: #6c757d;
+    border: 1px solid rgba(108, 117, 125, 0.2);
 }
 
 .btn-cancel:hover {
-    background-color: #e0e0e0;
+    background: rgba(108, 117, 125, 0.15);
+    color: #495057;
 }
 
 .btn-confirm {
-    background-color: #2196F3;
+    background: linear-gradient(135deg, #495057 0%, #6c757d 100%);
     color: white;
+    box-shadow: 0 4px 12px rgba(73, 80, 87, 0.3);
 }
 
 .btn-confirm:hover {
-    background-color: #0b7dda;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(73, 80, 87, 0.4);
 }
 
 /* 附件弹窗样式 */
@@ -589,6 +675,38 @@ h1 i {
 
 #downloadFromPreview:hover {
     background-color: #45a049;
+}
+
+/* 手机端响应式设计 - 统一标题样式 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    /* 统一手机端标题大小 */
+    h1 {
+        font-size: 20px;
+        padding-right: 60px;
+    }
+
+    .time {
+        font-size: 14px;
+    }
+
+    header {
+        padding: 12px 0;
+        margin-bottom: 20px;
+    }
+
+    /* 手机端标签字体调整 */
+    .form-group label {
+        font-size: 16px; /* 手机端标签字体比桌面端小一些 */
+    }
 }
 
 /* 缩略图添加手型光标 */

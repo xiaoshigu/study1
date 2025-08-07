@@ -1,61 +1,77 @@
-/* 全局样式 */
+/* 全局样式 - 商务风格浅色系 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Microsoft YaHei", Arial, sans-serif;
+    font-family: "Microsoft YaHei", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #f5f5f5;
-    color: #333;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #495057;
     line-height: 1.6;
     padding: 20px;
+    min-height: 100vh;
 }
 
-/* 主容器 */
+/* 主容器 - 低调奢华设计 */
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* 头部样式 */
+/* 头部样式 - 商务风格 */
 header {
-    margin-bottom: 20px;
-    position: relative;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
+    margin-bottom: 24px;
+    padding: 16px 0;
+    border-bottom: 2px solid #e9ecef;
+    background: linear-gradient(90deg, rgba(108, 117, 125, 0.05) 0%, transparent 100%);
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
 .time {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    color: #666;
-    font-size: 14px;
-    font-weight: bold;
+    color: #6c757d;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
 }
 
 h1 {
     font-size: 24px;
-    color: #333;
+    color: #495057;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    margin: 0;
 }
 
 h1 i {
-    margin-right: 10px;
-    color: #666;
+    margin-right: 12px;
+    color: #6c757d;
+    transition: color 0.3s ease;
+}
+
+h1 i:hover {
+    color: #495057;
 }
 
 h2 {
     font-size: 18px;
-    color: #444;
-    margin-bottom: 15px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #eee;
+    color: #495057;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e9ecef;
+    font-weight: 600;
 }
 
 /* 表单组样式 */
@@ -234,16 +250,40 @@ textarea {
 
 /* 响应式调整 */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    /* 统一手机端标题大小 */
+    h1 {
+        font-size: 20px;
+        padding-right: 60px;
+    }
+
+    .time {
+        font-size: 14px;
+    }
+
+    header {
+        padding: 12px 0;
+        margin-bottom: 20px;
+    }
+
     .dimensions-group {
         flex-direction: column;
     }
-    
+
     .dual-buttons {
         flex-direction: row; /* 保持水平布局 */
         gap: 10px;
         justify-content: space-between; /* 使按钮分布在两端 */
     }
-    
+
     .prev-btn, .next-btn {
         width: auto; /* 不强制100%宽度 */
         min-width: 100px; /* 与people.css保持一致 */
