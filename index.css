@@ -1,99 +1,138 @@
-/* 全局样式 - 商务风格浅色系 */
+/* 全局样式 - 现代浅蓝色主题 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Microsoft YaHei", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 商务字体 */
+    font-family: "Microsoft YaHei", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    font-size: 16px; /* 设置基础字体大小 */
 }
 
 body {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    color: #495057;
+    background: #F8FBFF;
+    color: #37474F;
     line-height: 1.6;
-    padding: 20px;
+    padding: 0;
     min-height: 100vh;
+    font-size: 16px; /* 确保body也有正确的字体大小 */
 }
 
-/* 主容器 - 低调奢华设计 */
+/* 主容器 - 全屏设计 */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
 }
 
-/* 头部样式 - 商务风格 */
+/* 头部样式 - 浅蓝色渐变 */
 header {
-    margin-bottom: 24px;
-    padding: 16px 0;
-    border-bottom: 2px solid #e9ecef;
-    background: linear-gradient(90deg, rgba(108, 117, 125, 0.05) 0%, transparent 100%);
-    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+    padding: 24px 32px 20px;
+    background: linear-gradient(135deg, #E3F2FD 0%, #F8FBFF 50%, #FFFFFF 100%);
+    border-bottom: 1px solid rgba(33, 150, 243, 0.08);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    position: relative;
 }
 
-/* 时间显示 - 与标题基线对齐 */
+/* 头部装饰性渐变条 */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #2196F3 0%, #64B5F6 50%, transparent 100%);
+}
+
+/* 时间显示 - 简洁样式 */
 .time {
-    color: #6c757d;
-    font-size: 16px;
+    color: #546E7A;
+    font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.5px;
     line-height: 1.5;
 }
 
-/* 标题 - 统一商务风格 */
+/* 标题 - 现代蓝色主题 */
 h1 {
-    font-size: 24px;
-    color: #495057;
+    font-size: 26px;
+    color: #1565C0;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    line-height: 1.5;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
     margin: 0;
+    display: flex;
+    align-items: center;
 }
 
 h1 i {
     margin-right: 12px;
-    color: #6c757d;
-    transition: color 0.3s ease;
+    color: #42A5F5;
+    transition: all 0.3s ease;
+    font-size: 22px;
 }
 
 h1 i:hover {
-    color: #495057;
+    color: #1976D2;
+    transform: translateX(-2px);
 }
 
-/* 表单组样式 */
+/* 表单内容区域 */
+form {
+    padding: 20px;
+}
+
+/* 表单组样式 - 保持原有简洁布局 */
 .form-group {
     margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-    font-size: 18px; /* 增大标签字体到18px */
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #1565C0;
+    font-size: 16px;
+    letter-spacing: 0.3px;
 }
 
 .form-group input[type="text"],
 .form-group input[type="date"],
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 14px 16px;
+    border: 2px solid rgba(33, 150, 243, 0.15);
+    border-radius: 10px;
+    font-size: 15px;
     box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.8);
+    color: #37474F;
+    transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2196F3;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    transform: translateY(-1px);
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 80px;
+    min-height: 100px;
+    line-height: 1.6;
 }
 
 /* 位置输入组 */
@@ -108,18 +147,22 @@ h1 i:hover {
 }
 
 .location-group .location-btn {
-    background-color: #0b7dda;
+    background: linear-gradient(135deg, #2196F3 0%, #42A5F5 100%);
     color: white;
     border: none;
-    padding: 0 15px;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    padding: 0 18px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
 }
 
 .location-group .location-btn:hover {
-    background-color: #0b7dda;
+    background: linear-gradient(135deg, #1976D2 0%, #2196F3 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(33, 150, 243, 0.4);
 }
 
 /* 日期组布局 */
@@ -145,11 +188,11 @@ h1 i:hover {
 .options-container {
     flex: 1;
     min-width: 250px;
-    background-color: #f9f9f9;
+    background-color: rgba(248, 251, 255, 0.6);
     border-radius: 8px;
     padding: 15px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid rgba(33, 150, 243, 0.1);
+    box-shadow: 0 2px 4px rgba(33, 150, 243, 0.05);
     box-sizing: border-box; /* 确保边框和内边距包含在宽度内 */
 }
 
@@ -157,14 +200,15 @@ h1 i:hover {
 .options-header {
     margin-bottom: 12px;
     padding-bottom: 8px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(33, 150, 243, 0.2);
 }
 
 .options-header h4 {
     margin: 0;
-    color: #555;
+    color: #1565C0;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
 .options-content {
@@ -220,12 +264,45 @@ h1 i:hover {
 }
 
 /* 响应式调整 */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        padding: 0;
+        margin: 0;
+    }
+
+    /* 统一手机端标题大小 */
+    h1 {
+        font-size: 20px;
+        padding-right: 60px;
+    }
+
+    .time {
+        font-size: 14px;
+    }
+
+    header {
+        padding: 12px 5px;
+        margin-bottom: 20px;
+    }
+
+    form {
+        padding: 20px 12px;
+    }
+
+    /* 手机端标签字体调整 */
+    .form-group label {
+        font-size: 16px; /* 手机端标签字体比桌面端小一些 */
+    }
+
     .options-group {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     .options-container {
         width: 100%;
         min-width: auto;
@@ -253,29 +330,41 @@ h1 i:hover {
     }
 }
 
-/* 上传区域样式 */
+/* 上传区域样式 - 现代卡片设计 */
 .upload-section {
-    margin: 30px 0;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
+    margin: 24px 0 0;
+    padding: 24px;
+    background: rgba(248, 251, 255, 0.6);
+    border-radius: 16px;
+    border: 1px solid rgba(33, 150, 243, 0.08);
+    transition: all 0.3s ease;
+}
+
+.upload-section:hover {
+    background: rgba(227, 242, 253, 0.4);
+    border-color: rgba(33, 150, 243, 0.15);
+    box-shadow: 0 4px 20px rgba(33, 150, 243, 0.06);
 }
 
 .upload-section h3 {
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     font-size: 18px;
+    color: #1565C0;
+    font-weight: 600;
 }
 
 .upload-section h3 span {
     font-size: 14px;
-    color: #666;
-    font-weight: normal;
-    margin-left: 10px;
+    color: #546E7A;
+    font-weight: 400;
+    margin-left: 12px;
 }
 
 /* 附件列表 */
 .attachment-list {
-    color: #666;
+    color: #546E7A;
     font-size: 15px;
+    line-height: 1.6;
 }
 
 /* 缩略图网格布局 */
@@ -404,23 +493,28 @@ h1 i:hover {
     color: #0b7dda;
 }
 
-/* 上传按钮 */
+/* 上传按钮 - 现代渐变设计 */
 .upload-btn {
-    background-color: #2196F3;
+    background: linear-gradient(135deg, #42A5F5 0%, #2196F3 100%);
     color: white;
     border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
+    padding: 12px 20px;
+    border-radius: 12px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 500;
     display: inline-flex;
     align-items: center;
-    transition: background-color 0.3s;
-    flex-shrink: 0; /* 防止按钮被压缩 */
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(33, 150, 243, 0.25);
+    letter-spacing: 0.3px;
 }
 
 .upload-btn:hover {
-    background-color: #0b7dda;
+    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(33, 150, 243, 0.35);
 }
 
 .upload-btn i {
@@ -439,27 +533,33 @@ h1 i:hover {
 /* 表单页脚 */
 .form-footer {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     padding-top: 20px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid rgba(33, 150, 243, 0.08);
 }
 
-/* 下一页按钮 */
+/* 下一页按钮 - 主要操作按钮 */
 .next-btn {
-    background-color: #00BFFF;
+    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 14px 28px;
+    border-radius: 14px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: 600;
     display: inline-flex;
     align-items: center;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.3);
+    letter-spacing: 0.5px;
 }
 
 .next-btn:hover {
-    background-color: #0099CC;
+    background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(25, 118, 210, 0.4);
 }
 
 .next-btn i {
@@ -677,37 +777,7 @@ h1 i:hover {
     background-color: #45a049;
 }
 
-/* 手机端响应式设计 - 统一标题样式 */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
 
-    .container {
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    /* 统一手机端标题大小 */
-    h1 {
-        font-size: 20px;
-        padding-right: 60px;
-    }
-
-    .time {
-        font-size: 14px;
-    }
-
-    header {
-        padding: 12px 0;
-        margin-bottom: 20px;
-    }
-
-    /* 手机端标签字体调整 */
-    .form-group label {
-        font-size: 16px; /* 手机端标签字体比桌面端小一些 */
-    }
-}
 
 /* 缩略图添加手型光标 */
 .thumbnail {

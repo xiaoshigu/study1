@@ -1,4 +1,4 @@
-/* 全局样式 - 商务风格浅色系 */
+/* 全局样式 - 现代浅蓝色主题 */
 * {
     margin: 0;
     padding: 0;
@@ -6,72 +6,98 @@
     font-family: "Microsoft YaHei", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html {
+    font-size: 16px; /* 设置基础字体大小 */
+}
+
 body {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    color: #495057;
+    background: #F8FBFF;
+    color: #37474F;
     line-height: 1.6;
-    padding: 20px;
+    padding: 0;
     min-height: 100vh;
+    font-size: 16px; /* 确保body也有正确的字体大小 */
 }
 
-/* 主容器 - 低调奢华设计 */
+/* 主容器 - 全屏设计 */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
 }
 
-/* 头部样式 - 商务风格 */
+/* 头部样式 - 浅蓝色渐变 */
 header {
-    margin-bottom: 24px;
-    padding: 16px 0;
-    border-bottom: 2px solid #e9ecef;
-    background: linear-gradient(90deg, rgba(108, 117, 125, 0.05) 0%, transparent 100%);
-    border-radius: 8px 8px 0 0;
+    margin-bottom: 0;
+    padding: 24px 32px 20px;
+    background: linear-gradient(135deg, #E3F2FD 0%, #F8FBFF 50%, #FFFFFF 100%);
+    border-bottom: 1px solid rgba(33, 150, 243, 0.08);
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+    position: relative;
 }
 
+/* 头部装饰性渐变条 */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #2196F3 0%, #64B5F6 50%, transparent 100%);
+}
+
+/* 时间显示 - 简洁样式 */
 .time {
-    color: #6c757d;
-    font-size: 16px;
+    color: #546E7A;
+    font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.5px;
     line-height: 1.5;
 }
 
+/* 标题 - 现代蓝色主题 */
 h1 {
-    font-size: 24px;
-    color: #495057;
+    font-size: 26px;
+    color: #1565C0;
     font-weight: 600;
-    letter-spacing: 0.5px;
-    line-height: 1.5;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
     margin: 0;
+    display: flex;
+    align-items: center;
 }
 
 h1 i {
     margin-right: 12px;
-    color: #6c757d;
-    transition: color 0.3s ease;
+    color: #42A5F5;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 22px;
 }
 
 h1 i:hover {
-    color: #495057;
+    color: #1976D2;
+    transform: translateX(-2px);
+}
+
+/* 表单内容区域 */
+form {
+    padding: 20px;
 }
 
 h2 {
     font-size: 18px;
-    color: #495057;
+    color: #1565C0;
     margin-bottom: 16px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #e9ecef;
+    border-bottom: 2px solid rgba(33, 150, 243, 0.15);
     font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
 /* 表单组样式 */
@@ -87,24 +113,35 @@ h2 {
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 600;
+    color: #1565C0;
+    font-size: 16px;
+    letter-spacing: 0.3px;
 }
 
 .form-select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: white;
+    padding: 14px 16px;
+    border: 2px solid rgba(33, 150, 243, 0.15);
+    border-radius: 10px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #37474F;
     appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23546E7A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
-    background-position: right 10px center;
+    background-position: right 16px center;
     background-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    outline: none;
+    border-color: #2196F3;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    transform: translateY(-1px);
 }
 
 textarea {
@@ -126,13 +163,23 @@ textarea {
     margin-bottom: 30px;
 }
 
+/* 三个主要容器的背景样式*/
+#pipeItemsContainer,
+#roadItemsContainer,
+#otherItemsContainer {
+    background-color: rgba(248, 251, 255, 0.6);
+    border: 1px solid rgba(33, 150, 243, 0.1);
+    border-radius: 2px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 /* 项目容器样式 */
 .item-container {
     position: relative;
     padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-    border: 1px solid #eee;
+    background-color: transparent;
+    border: none;
     margin-bottom: 15px;
 }
 
@@ -155,7 +202,7 @@ textarea {
 /* 分隔线样式 */
 .item-divider {
     height: 1px;
-    background-color: #ddd;
+    background-color: rgba(33, 150, 243, 0.15);
     margin: 15px 0;
     position: relative;
 }
@@ -182,13 +229,27 @@ textarea {
     flex: 1;
 }
 
-.form-select, input[type="text"], 
+input[type="text"],
 input[type="number"], textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
+    padding: 14px 16px;
+    border: 2px solid rgba(33, 150, 243, 0.15);
+    border-radius: 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.8);
+    color: #37474F;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2196F3;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+    transform: translateY(-1px);
 }
 
 textarea {
@@ -196,48 +257,55 @@ textarea {
     min-height: 60px;
 }
 
-/* 表单页脚 */
-.form-footer {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
+/* 页脚样式 */
+.footer {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-top: 1px solid rgba(33, 150, 243, 0.08);
     display: flex;
     justify-content: space-between;
-}
-
-.dual-buttons {
-    display: flex;
-    justify-content: space-between;
+    background: transparent;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .prev-btn, .next-btn {
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 14px 28px;
+    border-radius: 14px;
     cursor: pointer;
     font-size: 16px;
+    font-weight: 600;
     display: inline-flex;
     align-items: center;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
 }
 
 .prev-btn {
-    background-color: #f0f0f0;
-    color: #333;
-    border: 1px solid #ddd;
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    color: #1565C0;
+    border: 2px solid rgba(33, 150, 243, 0.2);
+    box-shadow: 0 4px 16px rgba(33, 150, 243, 0.15);
 }
 
 .prev-btn:hover {
-    background-color: #e0e0e0;
+    background: linear-gradient(135deg, #BBDEFB 0%, #90CAF9 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(33, 150, 243, 0.25);
 }
 
 .next-btn {
-    background-color: #00BFFF;
+    background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
     color: white;
     border: none;
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.3);
 }
 
 .next-btn:hover {
-    background-color: #0099CC;
+    background: linear-gradient(135deg, #1565C0 0%, #0D47A1 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(25, 118, 210, 0.4);
 }
 
 .prev-btn i {
@@ -249,14 +317,13 @@ textarea {
 }
 
 /* 响应式调整 */
-@media (max-width: 768px) {
+@media (max-width: 480px) {
     body {
-        padding: 10px;
+        padding: 0;
     }
 
     .container {
-        padding: 16px;
-        border-radius: 12px;
+        padding: 0;
     }
 
     /* 统一手机端标题大小 */
@@ -270,18 +337,24 @@ textarea {
     }
 
     header {
-        padding: 12px 0;
+        padding: 12px 5px;
         margin-bottom: 20px;
+    }
+
+    form {
+        padding: 20px 12px;
     }
 
     .dimensions-group {
         flex-direction: column;
     }
 
-    .dual-buttons {
+    .footer {
         flex-direction: row; /* 保持水平布局 */
         gap: 10px;
         justify-content: space-between; /* 使按钮分布在两端 */
+        padding: 15px 16px;
+        margin-top: 10px;
     }
 
     .prev-btn, .next-btn {
@@ -289,5 +362,6 @@ textarea {
         min-width: 100px; /* 与people.css保持一致 */
         margin: 0 5px; /* 添加间距 */
         justify-content: center; /* 保持居中 */
+        padding: 12px 20px;
     }
 }
